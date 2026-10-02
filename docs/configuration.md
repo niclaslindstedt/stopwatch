@@ -10,16 +10,16 @@ Read by Vite at build time through `import.meta.env` (declared in
 `src/vite-env.d.ts`) or by `vite.config.ts` from the environment. All
 optional.
 
-| Variable                  | Effect                                                                                                                                                                                                                                                                                                                                                      |
-| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `VITE_DROPBOX_APP_KEY`    | The Dropbox app key (a PKCE public client). Unset hides the Dropbox backend in Settings → Cloud sync.                                                                                                                                                                                                                                                       |
-| `VITE_DROPBOX_APP_FOLDER` | The Dropbox app-folder name (`Apps/<name>/`), fixed by your Dropbox app's configuration. Default `stopwatch`.                                                                                                                                                                                                                                               |
-| `VITE_BASE`               | The deploy base path. `pages.yml` sets `/` for the release and `/preview/` for the rolling main build.                                                                                                                                                                                                                                                      |
-| `VITE_PWA_IGNORE_PATHS`   | Sibling deploy paths the root service worker must disown (`/preview/`). Only the root release sets it.                                                                                                                                                                                                                                                      |
-| `VITE_EDITION`            | Which build this is. `store` for the one sold in the App Store, which — like the desktop build — carries no link back to the source: no Open Graph tags naming the website, no `CNAME` and no `og.png` (`websiteOnly` in `vite.config.ts`). Anything else, including unset, is the website.                                                                 |
-| `VITE_SHELL_BUILD`        | `on` when the desktop or phone shell builds the site to bundle it: no service worker is emitted and the in-app update prompt is off, because a build inside a binary updates by being replaced. Set by the shells' bundle scripts, never by hand.                                                                                                           |
+| Variable                  | Effect                                                                                                                                                                                                                                                                                                                                                                              |
+| ------------------------- | ----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `VITE_DROPBOX_APP_KEY`    | The Dropbox app key (a PKCE public client). Unset hides the Dropbox backend in Settings → Cloud sync.                                                                                                                                                                                                                                                                               |
+| `VITE_DROPBOX_APP_FOLDER` | The Dropbox app-folder name (`Apps/<name>/`), fixed by your Dropbox app's configuration. Default `stopwatch`.                                                                                                                                                                                                                                                                       |
+| `VITE_BASE`               | The deploy base path. `pages.yml` sets `/` for the release and `/preview/` for the rolling main build.                                                                                                                                                                                                                                                                              |
+| `VITE_PWA_IGNORE_PATHS`   | Sibling deploy paths the root service worker must disown (`/preview/`). Only the root release sets it.                                                                                                                                                                                                                                                                              |
+| `VITE_EDITION`            | Which build this is. `store` for the one sold in the App Store, which — like the desktop build — carries no link back to the source: no Open Graph tags naming the website, no `CNAME` and no `og.png` (`websiteOnly` in `vite.config.ts`). Anything else, including unset, is the website.                                                                                         |
+| `VITE_SHELL_BUILD`        | `on` when the desktop or phone shell builds the site to bundle it: no service worker is emitted and the in-app update prompt is off, because a build inside a binary updates by being replaced. Set by the shells' bundle scripts, never by hand.                                                                                                                                   |
 | `APP_DISPLAY_NAME`        | The name the app shows — on the watch, the bar and in the sentences that name it — in an **app build** only (the phone's store edition and the desktop shell): the listing's name, the same one under the icon. `native/scripts/bundle-web.mjs` passes it from the environment or `native/.env`; the website, and a build nobody named, say `Stopwatch` (see `src/app/appName.ts`). |
-| `VITE_SEED`               | `demo` boots the app onto the demo document — an afternoon with a few stopwatches and timers on the go, built for the moment it opens and held in memory — before the first render, with sync paused and backend changes refused (see `src/app/dev/`). `make demo` and the store screenshots set it; a release never does, and the check folds away in any other build. |
+| `VITE_SEED`               | `demo` boots the app onto the demo document — an afternoon with a few stopwatches and timers on the go, built for the moment it opens and held in memory — before the first render, with sync paused and backend changes refused (see `src/app/dev/`). `make demo` and the store screenshots set it; a release never does, and the check folds away in any other build.             |
 
 The Dropbox identifier is public by design: the flow is PKCE, so there is no
 client secret anywhere in the pipeline.
@@ -57,17 +57,17 @@ never by the web app. See
 Under the **⚙** — on the dial over the watch, on the top bar everywhere else.
 Persisted per device in localStorage (`stopwatch:settings`), never synced.
 
-| Setting                | Values                                       | Default   |
-| ---------------------- | -------------------------------------------- | --------- |
-| Theme                  | Light / Dark / Device                        | Device    |
-| Dial                   | nine presets / Custom                        | Uptown    |
-| Size                   | Small / Medium / Large                       | Large     |
-| Reflections            | on / off (where the device has the sensors)  | off       |
-| Times of day           | Automatic / 7:26 PM / 19:26                  | Automatic |
-| Chime                  | on / off                                     | on        |
-| Vibrate                | on / off                                     | on        |
-| Developer mode         | on / off                                     | off       |
-| Capture console output | on / off (developer mode)                    | off       |
+| Setting                | Values                                      | Default   |
+| ---------------------- | ------------------------------------------- | --------- |
+| Theme                  | Light / Dark / Device                       | Device    |
+| Dial                   | nine presets / Custom                       | Uptown    |
+| Size                   | Small / Medium / Large                      | Large     |
+| Reflections            | on / off (where the device has the sensors) | off       |
+| Times of day           | Automatic / 7:26 PM / 19:26                 | Automatic |
+| Chime                  | on / off                                    | on        |
+| Vibrate                | on / off                                    | on        |
+| Developer mode         | on / off                                    | off       |
+| Capture console output | on / off (developer mode)                   | off       |
 
 **Automatic** is the device's region, read through the browser's `Intl`
 (`src/app/locale.ts`): a twelve-hour clock in the United States, the 24-hour
@@ -87,17 +87,17 @@ up.
 
 ## Storage keys
 
-| Key                             | Holds                                                           |
-| ------------------------------- | --------------------------------------------------------------- |
-| `stopwatch:doc`                 | The document: stopwatches and timers (see `architecture.md`)    |
-| `stopwatch:doc:unreadable`      | A quarantined copy of a document this build could not parse     |
-| `stopwatch:settings`            | The runtime settings above                                      |
+| Key                             | Holds                                                                |
+| ------------------------------- | -------------------------------------------------------------------- |
+| `stopwatch:doc`                 | The document: stopwatches and timers (see `architecture.md`)         |
+| `stopwatch:doc:unreadable`      | A quarantined copy of a document this build could not parse          |
+| `stopwatch:settings`            | The runtime settings above                                           |
 | `stopwatch:sync:backend`        | Which backend is active (`local`, `icloud`, `dropbox`, `selfhosted`) |
-| `stopwatch:sync:dropbox`        | Dropbox tokens                                                  |
-| `stopwatch:sync:selfhosted`     | Which namespace on the paired storage server holds the document |
-| `stopwatch:logs`                | The in-app log buffer                                           |
-| `stopwatch:language`            | The language choice (English only today)                        |
-| `oss:cache:<backend>:stopwatch` | The framework's offline cache of the cloud copy                 |
+| `stopwatch:sync:dropbox`        | Dropbox tokens                                                       |
+| `stopwatch:sync:selfhosted`     | Which namespace on the paired storage server holds the document      |
+| `stopwatch:logs`                | The in-app log buffer                                                |
+| `stopwatch:language`            | The language choice (English only today)                             |
+| `oss:cache:<backend>:stopwatch` | The framework's offline cache of the cloud copy                      |
 
 iCloud has no key of its own beyond `stopwatch:sync:backend`: there is nothing
 to store. The container belongs to the device's iCloud account, so choosing

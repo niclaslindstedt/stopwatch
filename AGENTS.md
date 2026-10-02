@@ -493,34 +493,34 @@ job only type-checks and runs `npx expo-doctor`. See `native/README.md` and `nat
 
 ## Where new code goes
 
-| Change                                             | Goes in                                                                                                                                                                                                         |
-| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| A new thing a stopwatch or timer holds             | `src/app/types.ts` (model) + `watch.ts` (what it reads, the edit) + the validation in `migrations.ts` (a step only if it is not purely additive) — and ask what it feeds                                        |
-| A new reading                                      | `src/app/watch.ts`, with tests at real times in `tests/watch_test.ts`                                                                                                                                           |
-| A change to what a button or the dial does         | `src/app/watch.ts` (the edit, tested) + `useWatches.ts` (which edit a press makes) — never a second copy of the edit in a screen                                                                                |
-| A change to how the dial draws                     | `src/app/clock.ts` (geometry, tested), `sheen.ts` (the light on the metal, tested) or `Dial.tsx` (paint) — `WatchFace.tsx` for what a press on it does                                                         |
-| A change to the registers                          | `src/app/clock.ts` (`registers`, `registerLabels`, and where `dialLayout` measures the room — walked for every dial by `tests/clock_test.ts`) + `Dial.tsx` (`RegisterDial`) — never a second set of radii        |
-| A dial option that only makes sense with another   | `src/app/clock.ts` (let the geometry decide, the way `placementOf` and `registers().hidden` do) + `DialPicker.tsx` (drop the control rather than offer a choice that cannot look right)                         |
-| A change to how the hands move                     | `src/app/clock.ts` (`chronoTurns`, the beat and the glide, tested) or `useHands.ts` (the frames) — never a CSS transition                                                                                       |
-| A change to the shape of a hand                    | `src/app/look.ts` (`DIAL_HANDS`) + `clock.ts` (`handPoint`) + `Dial.tsx` (paint) — the tip is an angle, never a share of the hand's length                                                                     |
-| What happens when a timer runs out                 | `src/app/useAlarm.ts` (`justRung`, tested in `tests/alarm_test.ts`) — local only: a sound is made by the browser, never fetched                                                                                 |
-| A new keyboard shortcut                            | `src/app/shortcuts.ts` (the key and the command, tested in `tests/shortcuts_test.ts`) + the screen that answers the command                                                                                     |
-| Something only the desk does                       | Behind `useDesk()` in `App.tsx`, or a `lg:` class / `@media (min-width: 64rem)` rule — the phone shell stays as it is                                                                                           |
-| Something the desk and a phone on its side share   | Behind `useWide()`, or a `wide:` class / the paired `@media` list in `styles.css` — never `lg:` alone; the edges are `shape.ts`'s                                                                               |
-| Something the phone laid down does when left alone | `src/app/useFocus.ts` (when) + `[data-focus="on"]` in `styles.css` (what) — fade it and take the press off it, never `display: none` or a layout that moves the watch                                           |
-| A change to the light behind the case              | `src/app/look.ts` (`FACE_BACKLIGHT`, `resolveBacklight` — walked by `tests/look_test.ts`) + `DialPicker.tsx`; never a second backlight table                                                                    |
-| A new face, marker, typeface, ring, hand or preset | Run the `add-watch-face` skill (`.agents/skills/add-watch-face/`): `src/app/look.ts` (id + spec), a string in `en.ts`, `main.tsx` for a bundled `@fontsource` family, and `make shots` to look at it            |
-| A control that answers being held                  | `src/app/useLongPress.ts` — spread its handlers on the button; never a second timer in a screen                                                                                                                 |
-| A modal's save / cancel                            | `src/app/ModalHeader.tsx` — one top bar; Enter and Escape are that bar's, not a form's                                                                                                                          |
-| A new screen                                       | `src/app/<Name>Screen.tsx` + a tab in `src/app/BottomNav.tsx`, or a button in `src/app/TopBar.tsx` if it is an action rather than a place                                                                       |
-| A new setting                                      | `src/app/useAppSettings.ts` (shape + clamping, tested in `tests/settings_test.ts`) + a `Section` in `SettingsScreen.tsx`                                                                                        |
-| A new developer-only affordance                    | `src/app/dev/`, revealed behind `settings.devMode` in `SettingsScreen.tsx`                                                                                                                                      |
-| A change to what the demo shows                    | `src/app/dev/demoData.ts` (offsets from the moment it opens, never fixed dates), with tests in `tests/demo_test.ts`, which opens it across a year at hours round the clock                                      |
-| A new storage backend                              | The framework, not here — this app only wires adapters up in `useSyncEngine.ts`                                                                                                                                 |
-| A backend only some hosts can offer                | `src/app/cloudHost.ts` (the capability, tested in `tests/cloudHost_test.ts`) + a row in `useSyncEngine.ts`'s `PROVIDER_NAMES` and its `available` — never a check for the wrapper                              |
-| Anything in the native wrapper                     | `native/...` — and read "The native wrapper" above first                                                                                                                                                        |
-| Any user-facing string                             | `src/app/i18n/en.ts`, never inline in a component                                                                                                                                                               |
-| A shared UI primitive                              | The framework, if it is domain-free; `src/app/` only if it is specific to stopwatches                                                                                                                           |
+| Change                                             | Goes in                                                                                                                                                                                                   |
+| -------------------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| A new thing a stopwatch or timer holds             | `src/app/types.ts` (model) + `watch.ts` (what it reads, the edit) + the validation in `migrations.ts` (a step only if it is not purely additive) — and ask what it feeds                                  |
+| A new reading                                      | `src/app/watch.ts`, with tests at real times in `tests/watch_test.ts`                                                                                                                                     |
+| A change to what a button or the dial does         | `src/app/watch.ts` (the edit, tested) + `useWatches.ts` (which edit a press makes) — never a second copy of the edit in a screen                                                                          |
+| A change to how the dial draws                     | `src/app/clock.ts` (geometry, tested), `sheen.ts` (the light on the metal, tested) or `Dial.tsx` (paint) — `WatchFace.tsx` for what a press on it does                                                    |
+| A change to the registers                          | `src/app/clock.ts` (`registers`, `registerLabels`, and where `dialLayout` measures the room — walked for every dial by `tests/clock_test.ts`) + `Dial.tsx` (`RegisterDial`) — never a second set of radii |
+| A dial option that only makes sense with another   | `src/app/clock.ts` (let the geometry decide, the way `placementOf` and `registers().hidden` do) + `DialPicker.tsx` (drop the control rather than offer a choice that cannot look right)                   |
+| A change to how the hands move                     | `src/app/clock.ts` (`chronoTurns`, the beat and the glide, tested) or `useHands.ts` (the frames) — never a CSS transition                                                                                 |
+| A change to the shape of a hand                    | `src/app/look.ts` (`DIAL_HANDS`) + `clock.ts` (`handPoint`) + `Dial.tsx` (paint) — the tip is an angle, never a share of the hand's length                                                                |
+| What happens when a timer runs out                 | `src/app/useAlarm.ts` (`justRung`, tested in `tests/alarm_test.ts`) — local only: a sound is made by the browser, never fetched                                                                           |
+| A new keyboard shortcut                            | `src/app/shortcuts.ts` (the key and the command, tested in `tests/shortcuts_test.ts`) + the screen that answers the command                                                                               |
+| Something only the desk does                       | Behind `useDesk()` in `App.tsx`, or a `lg:` class / `@media (min-width: 64rem)` rule — the phone shell stays as it is                                                                                     |
+| Something the desk and a phone on its side share   | Behind `useWide()`, or a `wide:` class / the paired `@media` list in `styles.css` — never `lg:` alone; the edges are `shape.ts`'s                                                                         |
+| Something the phone laid down does when left alone | `src/app/useFocus.ts` (when) + `[data-focus="on"]` in `styles.css` (what) — fade it and take the press off it, never `display: none` or a layout that moves the watch                                     |
+| A change to the light behind the case              | `src/app/look.ts` (`FACE_BACKLIGHT`, `resolveBacklight` — walked by `tests/look_test.ts`) + `DialPicker.tsx`; never a second backlight table                                                              |
+| A new face, marker, typeface, ring, hand or preset | Run the `add-watch-face` skill (`.agents/skills/add-watch-face/`): `src/app/look.ts` (id + spec), a string in `en.ts`, `main.tsx` for a bundled `@fontsource` family, and `make shots` to look at it      |
+| A control that answers being held                  | `src/app/useLongPress.ts` — spread its handlers on the button; never a second timer in a screen                                                                                                           |
+| A modal's save / cancel                            | `src/app/ModalHeader.tsx` — one top bar; Enter and Escape are that bar's, not a form's                                                                                                                    |
+| A new screen                                       | `src/app/<Name>Screen.tsx` + a tab in `src/app/BottomNav.tsx`, or a button in `src/app/TopBar.tsx` if it is an action rather than a place                                                                 |
+| A new setting                                      | `src/app/useAppSettings.ts` (shape + clamping, tested in `tests/settings_test.ts`) + a `Section` in `SettingsScreen.tsx`                                                                                  |
+| A new developer-only affordance                    | `src/app/dev/`, revealed behind `settings.devMode` in `SettingsScreen.tsx`                                                                                                                                |
+| A change to what the demo shows                    | `src/app/dev/demoData.ts` (offsets from the moment it opens, never fixed dates), with tests in `tests/demo_test.ts`, which opens it across a year at hours round the clock                                |
+| A new storage backend                              | The framework, not here — this app only wires adapters up in `useSyncEngine.ts`                                                                                                                           |
+| A backend only some hosts can offer                | `src/app/cloudHost.ts` (the capability, tested in `tests/cloudHost_test.ts`) + a row in `useSyncEngine.ts`'s `PROVIDER_NAMES` and its `available` — never a check for the wrapper                         |
+| Anything in the native wrapper                     | `native/...` — and read "The native wrapper" above first                                                                                                                                                  |
+| Any user-facing string                             | `src/app/i18n/en.ts`, never inline in a component                                                                                                                                                         |
+| A shared UI primitive                              | The framework, if it is domain-free; `src/app/` only if it is specific to stopwatches                                                                                                                     |
 
 ## Test conventions
 
@@ -576,19 +576,19 @@ with `[Learn more](feature:<slug>)`.
 
 ## Documentation sync points
 
-| If you change…                       | Update…                                                                                                                                                                        |
-| ------------------------------------ | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `watch.ts`                           | `docs/features/watch.md`, `docs/features/stopwatches.md`, `docs/features/timers.md`                                                                                            |
-| The `Run` / `Timer` shape            | `docs/architecture.md`'s data shape and the validation in `migrations.ts` — a purely additive optional field needs the validation rather than a step                           |
-| How the dial draws or the registers  | `docs/features/themes.md` and the README's Usage table                                                                                                                         |
-| The sync engine or the merge         | `docs/sync.md`                                                                                                                                                                 |
-| `cloudHost.ts` or the bridge         | `docs/sync.md`, `docs/features/cloud-sync.md`, `docs/features/native-app.md`, `native/README.md`, and `tests/native_icloud_test.ts` — which pins the strings both halves share |
-| Anything under `native/`             | `docs/features/native-app.md`, `native/README.md`, `native/RELEASING.md`                                                                                                       |
-| A `VITE_*` variable                  | `docs/configuration.md`, `src/vite-env.d.ts`, the README's Configuration table, and the workflows that pass it                                                                 |
-| A screen's behaviour                 | The matching `docs/features/*.md` and the README's Usage table                                                                                                                 |
-| The navigation (nav or top bar)      | `docs/architecture.md`'s tree and the README's Usage tables                                                                                                                    |
-| Module layout                        | The "Where new code goes" table above and `docs/architecture.md`                                                                                                               |
-| A make target or script              | `CONTRIBUTING.md`, the README's Quick start, and this file's command list                                                                                                      |
+| If you change…                      | Update…                                                                                                                                                                        |
+| ----------------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `watch.ts`                          | `docs/features/watch.md`, `docs/features/stopwatches.md`, `docs/features/timers.md`                                                                                            |
+| The `Run` / `Timer` shape           | `docs/architecture.md`'s data shape and the validation in `migrations.ts` — a purely additive optional field needs the validation rather than a step                           |
+| How the dial draws or the registers | `docs/features/themes.md` and the README's Usage table                                                                                                                         |
+| The sync engine or the merge        | `docs/sync.md`                                                                                                                                                                 |
+| `cloudHost.ts` or the bridge        | `docs/sync.md`, `docs/features/cloud-sync.md`, `docs/features/native-app.md`, `native/README.md`, and `tests/native_icloud_test.ts` — which pins the strings both halves share |
+| Anything under `native/`            | `docs/features/native-app.md`, `native/README.md`, `native/RELEASING.md`                                                                                                       |
+| A `VITE_*` variable                 | `docs/configuration.md`, `src/vite-env.d.ts`, the README's Configuration table, and the workflows that pass it                                                                 |
+| A screen's behaviour                | The matching `docs/features/*.md` and the README's Usage table                                                                                                                 |
+| The navigation (nav or top bar)     | `docs/architecture.md`'s tree and the README's Usage tables                                                                                                                    |
+| Module layout                       | The "Where new code goes" table above and `docs/architecture.md`                                                                                                               |
+| A make target or script             | `CONTRIBUTING.md`, the README's Quick start, and this file's command list                                                                                                      |
 
 ## Parity and cross-cutting rules
 
@@ -632,6 +632,7 @@ with `[Learn more](feature:<slug>)`.
   faces the app ships are `@fontsource` packages, imported in `main.tsx` a
   weight and a subset at a time, and bundled from this origin. A font — or a
   sound — is never reached for over the network.
+
 ## Website staleness
 
 The app _is_ the website — `pages.yml` builds it and deploys `dist/`. There is
@@ -650,10 +651,10 @@ Skills live under `.agents/skills/`; `.claude/skills` is a symlink into that
 tree. Each has a `SKILL.md` with its discovery process, its source→output
 mapping, and a `.last-updated` marker.
 
-| Skill             | Runs when                                                                                                                                              |
-| ----------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------ |
-| `maintenance`     | The registry and run order for every other skill — start here                                                                                          |
-| `write-changeset` | Any user-visible change, before opening the PR                                                                                                         |
-| `update-docs`     | `src/app/` changed in a way a `docs/` topic describes                                                                                                  |
-| `update-readme`   | Commands, configuration, or the feature set changed                                                                                                    |
+| Skill             | Runs when                                                                                                                                                  |
+| ----------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------- |
+| `maintenance`     | The registry and run order for every other skill — start here                                                                                              |
+| `write-changeset` | Any user-visible change, before opening the PR                                                                                                             |
+| `update-docs`     | `src/app/` changed in a way a `docs/` topic describes                                                                                                      |
+| `update-readme`   | Commands, configuration, or the feature set changed                                                                                                        |
 | `add-watch-face`  | A new dial, preset, marker style, typeface or ring is asked for — often from a photograph of a stopwatch; keeps makers' names and trademarked features out |
