@@ -1,0 +1,103 @@
+# The app on a phone
+
+Stopwatch is a PWA first: open it in a browser, add it to the home
+screen, and it is an app. `native/` is the other way in — the same web app,
+wrapped thinly enough to ship through the **App Store** and **Google Play**,
+and in exchange for that wrapper it gains one thing the browser cannot give
+it: **iCloud**.
+
+## What the wrapper is
+
+A `WebView` and a loopback HTTP server, and very little else.
+
+The whole web build is packed into the download (`assets/webroot.zip`),
+unpacked on first launch, and served from `http://localhost:<fixed port>`.
+Nothing is fetched. The app works on a plane, in a tunnel, and on a phone that
+has never had a network — and it changes only when a new build ships to the
+store, not when the website deploys.
+
+Around that, the wrapper keeps the native chrome in step: the status bar and
+the safe-area bands take the page's own theme, so a dark dial does not sit
+under a white bar. Links out of the app open in the system browser. On Android
+the hardware back button drives the WebView's history.
+
+There is **no native UI**. Everything you see is the web app, unchanged, down
+to the last pixel of the dial.
+
+## iCloud
+
+**Settings → Cloud sync** offers **iCloud Drive** beside Dropbox, and only in
+the app — a browser has no way to reach a device's iCloud,
+so on the website the option is simply not there.
+
+Choosing it is all there is to it. There is no account to connect and no
+window to grant anything in: the container belongs to the iCloud account the
+phone is already signed into. From then on the document — one file,
+`stopwatch.json` — is kept in the app's own iCloud folder, and every device signed
+into the same account merges the same way two Dropbox devices do: stopwatch by
+stopwatch, the later edit of each winning (see [`../sync.md`](../sync.md)).
+
+The file lives under **Files → iCloud Drive → Stopwatch**, where you can open
+it, copy it out, or delete it. That is deliberate: these are your stopwatches,
+and a copy you cannot see is a copy you do not control.
+
+Two things it will tell you rather than guess about:
+
+- **iCloud is signed out.** The app says so and offers to reconnect instead of
+  failing quietly; signing in happens in iOS Settings, and the app re-checks
+  every time you come back to it.
+- **The file is in iCloud but has not arrived yet.** Another device wrote it a
+  moment ago and the bytes are still coming down. The app waits, and if they
+  do not arrive it keeps working from the copy on this device and says it is
+  offline — it never treats a file it could not read as an empty one.
+
+Android has no iCloud, so there the app is the web app served from inside the
+download, with Dropbox as before.
+
+## Dropbox
+
+**Settings → Cloud sync → Dropbox** opens Dropbox's sign-in in a sheet over
+the app — not in Safari, which could never hand the result back. Approving
+closes the sheet and connects; closing it leaves the backend as it was. The
+sheet is the platform's own authentication session, and the wrapper never
+sees a token: the page makes the exchange itself, exactly as the website does.
+
+## Exporting
+
+A phone has nowhere for a download to go, so in the app **Settings → Download
+a backup** opens the share sheet instead, with the file already named: save it
+to Files, AirDrop it, mail it. The website keeps its download. The wrapper is handed the file
+only to show the sheet, and keeps nothing but the latest one in its cache.
+
+## Scanning a pairing code
+
+Connecting the app to **your own storage server** takes a pairing code, which
+the server's console or one of your other devices shows as a QR code. In the
+app, the pairing sheet has a **Scan** button: tap it, allow the camera the
+first time, and point the phone at the code. The camera is used for nothing
+else — it is asked for only when you tap Scan, and no picture is kept; only
+the code it reads is used. Pasting the code still works, and if you turned
+the camera off for the app, the sheet says so and you can allow it again in
+Settings or paste instead. (The phone's own camera app would open the code's
+link in the browser, on the website, rather than here.)
+
+## What the wrapper is not allowed to do
+
+Two rules, and they are what keep the app and the website the same product:
+
+- **Nothing in `src/` knows the wrapper exists.** The web app does not check
+  whether it is native. It looks for a document-store _capability_ on
+  `window` (`src/app/cloudHost.ts`) and offers the backend when one answers —
+  which is why a second host could light the same option up, and why the
+  browser shows no native-shaped hole.
+- **The wrapper decides nothing about a stopwatch.** It moves bytes. What a
+  stopwatch reads, when a timer rings, and how two copies reconcile are the
+  web app's, in `watch.ts` and `merge.ts`. A second copy of that arithmetic in
+  Swift would drift the first week it existed. That includes the alarm: a
+  timer rings from the web app, with a chime the page makes itself.
+
+## Building it
+
+See [`../../native/README.md`](../../native/README.md) for the day-to-day, and
+[`../../native/RELEASING.md`](../../native/RELEASING.md) for what a store build
+needs.
