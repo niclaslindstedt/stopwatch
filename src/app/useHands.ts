@@ -70,7 +70,12 @@ export function useHands(
    *  same thing — the reading at mount — and then part company, the first
    *  never changing again so that React has nothing to write. */
   const painted = useRef<Turns>(
-    chronoTurns(readingAt(reading, nowExact()), beats, dirOf(reading)),
+    chronoTurns(
+      readingAt(reading, nowExact()),
+      beats,
+      dirOf(reading),
+      reading.value,
+    ),
   );
   const written = useRef<Turns>({ ...painted.current });
 
@@ -93,7 +98,7 @@ export function useHands(
       frame = requestAnimationFrame(step);
       const r = current.current;
       const value = readingAt(r, nowExact());
-      const target = chronoTurns(value, beats, dirOf(r));
+      const target = chronoTurns(value, beats, dirOf(r), r.value);
 
       if (glide) {
         const elapsed = performance.now() - glide.started;
@@ -125,7 +130,12 @@ export function useHands(
   return {
     turns: live
       ? painted.current
-      : chronoTurns(readingAt(reading, 0), beats, dirOf(reading)),
+      : chronoTurns(
+          readingAt(reading, 0),
+          beats,
+          dirOf(reading),
+          reading.value,
+        ),
     winding,
     hour,
     minute,

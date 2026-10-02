@@ -885,12 +885,14 @@ export function heldAt(value: Seconds): Reading {
   return { value, at: 0, rate: 0 };
 }
 
-/** Where a reading is at `now`: never below nothing. */
+/** Where a reading is at `now`: never below nothing. A moment before the one
+ *  it was taken at — another device's clock ahead of this one — moves it not
+ *  at all, the way `elapsed` counts a stretch that starts in the future. */
 export function readingAt(reading: Reading, now: Millis): Seconds {
   if (reading.rate === 0) return Math.max(0, reading.value);
   return Math.max(
     0,
-    reading.value + (reading.rate * (now - reading.at)) / 1000,
+    reading.value + (reading.rate * Math.max(0, now - reading.at)) / 1000,
   );
 }
 
@@ -926,16 +928,25 @@ export function onBeat(
  * its own centre: the seconds round the dial, the minutes round the register
  * at three, the hours round the one at nine. `dir` is which way the reading
  * is going, which is which way a step lands from.
+ *
+ * `from` is the value the reading set out from (`Reading.value`). A hand lands
+ * only on a beat it stepped to, and the beat a reading set out on is not one:
+ * a held dial sits on its mark, and the press that starts one moves nothing
+ * until the first beat — rather than the hand flicking a beat the wrong way
+ * and landing back where it already was.
  */
 export function chronoTurns(
   value: Seconds,
   beats: number | null,
   dir: 1 | -1 = 1,
+  from?: Seconds,
 ): Turns {
   const v = Math.max(0, value);
   const beat = onBeat(v, beats, dir);
   let landing = 0;
-  if (beats !== null) {
+  const stepped =
+    from === undefined || onBeat(Math.max(0, from), beats, dir) !== beat;
+  if (beats !== null && stepped) {
     const span = Math.min(LANDING_MS, (LANDING_SHARE / beats) * 1000);
     const since = Math.abs(v - beat) * 1000;
     landing = (6 / beats) * (1 - easeOutBack(since / span));

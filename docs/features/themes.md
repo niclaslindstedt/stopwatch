@@ -174,7 +174,9 @@ is lit by the light its face comes with.
   runs the hand round continuously, with no step at all. Counting up, the
   hand steps on the beat it has just passed; counting down, on the one it is
   coming to, so a timer's hand reads the same second its figure does — 0:01
-  for the whole of the last second. Whichever you pick, the rate is the rate:
+  for the whole of the last second. Only a beat the hand stepped to is
+  landed: a held hand sits on its mark, and the press that starts one does
+  not flick it. Whichever you pick, the rate is the rate:
   the hands are drawn from the clock every frame rather than nudged once a
   second, so a beat does not hesitate when the app is busy. With reduced
   motion on the hands still keep time; what they skip is the glide after a

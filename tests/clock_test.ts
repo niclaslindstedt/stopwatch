@@ -879,6 +879,11 @@ describe("readings", () => {
   it("never go below nothing", () => {
     expect(readingAt({ value: 2, at: 0, rate: -1 }, 10_000)).toBe(0);
   });
+
+  it("do not move before the moment they were taken at", () => {
+    expect(readingAt({ value: 10, at: 5000, rate: 1 }, 4000)).toBe(10);
+    expect(readingAt({ value: 10, at: 5000, rate: -1 }, 4000)).toBe(10);
+  });
 });
 
 describe("chronoTurns", () => {
@@ -922,6 +927,21 @@ describe("chronoTurns", () => {
     expect(chronoTurns(6.5, 1, -1).second).toBeCloseTo(7 * 6, 6);
     // And the step is landed from the second before, the way it came.
     expect(chronoTurns(6.95, 1, -1).second).toBeGreaterThan(7 * 6);
+  });
+
+  it("lands only on a beat it stepped to, not the one it set out on", () => {
+    // Held on a whole second, the hand is on its mark — a quartz's would
+    // otherwise sit a whole second short of it.
+    expect(chronoTurns(12, 1, 1, 12).second).toBeCloseTo(72, 6);
+    expect(chronoTurns(0, 8, 1, 0).second).toBe(0);
+    // A timer set to five minutes and just started has not stepped yet.
+    expect(chronoTurns(300 - 0.01, 8, -1, 300).second).toBeCloseTo(0, 6);
+    expect(chronoTurns(300 - 0.01, 1, -1, 300).second).toBeCloseTo(0, 6);
+    // Its first beat is landed from the one it left.
+    expect(chronoTurns(300 - 0.13, 8, -1, 300).second).toBeGreaterThan(-0.75);
+    expect(chronoTurns(299 - 0.01, 1, -1, 300).second).toBeGreaterThan(-6);
+    // And a stopwatch's, from nothing.
+    expect(chronoTurns(1.01, 1, 1, 0).second).toBeLessThan(6);
   });
 
   it("keeps a minute register on the right minute on the way down", () => {

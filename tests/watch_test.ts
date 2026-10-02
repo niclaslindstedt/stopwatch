@@ -5,6 +5,7 @@ import { describe, expect, it } from "vitest";
 
 import {
   activeOf,
+  dialReading,
   durationOf,
   elapsed,
   endsAt,
@@ -29,6 +30,7 @@ import {
   timerState,
   toggle,
 } from "../src/app/watch.ts";
+import { readingAt } from "../src/app/clock.ts";
 import {
   LATER,
   STAMP,
@@ -168,6 +170,58 @@ describe("a timer", () => {
     const going = timer({ startedAt: T0 });
     expect(setDuration(going, m(7), LATER)).toBe(going);
     expect(setDuration(timer(), 0, LATER).duration).toBe(m(5));
+  });
+});
+
+describe("dialReading", () => {
+  // The screen around the dial ticks once a second, so the `now` it hands in
+  // can be most of a second older than the press that started the run.
+  const stale = T0 - 900;
+
+  it("anchors a timer started after the screen's last tick at its start", () => {
+    const t = start(timer(), T0, LATER);
+    const r = dialReading(t, "timer", stale);
+    expect(r).toEqual({ value: 300, at: T0, rate: -1 });
+    expect(readingAt(r, T0)).toBe(300);
+    expect(readingAt(r, T0 + 999)).toBeCloseTo(299.001, 6);
+    expect(readingAt(r, T0 + s(1))).toBe(299);
+  });
+
+  it("reads the same whichever tick of the screen it is taken at", () => {
+    const t = start(timer({ banked: m(1) }), T0, LATER);
+    for (const now of [stale, T0, T0 + 400, T0 + s(30)]) {
+      expect(readingAt(dialReading(t, "timer", now), T0 + s(45))).toBe(195);
+    }
+  });
+
+  it("anchors a stopwatch carried on at the moment it was carried on", () => {
+    const sw = start(stopwatch({ banked: s(12) }), T0, LATER);
+    const r = dialReading(sw, "stopwatch", stale);
+    expect(r).toEqual({ value: 12, at: T0, rate: 1 });
+    expect(readingAt(r, stale)).toBe(12);
+    expect(readingAt(r, T0 + 2500)).toBe(14.5);
+  });
+
+  it("holds one that is not running at what it reads", () => {
+    expect(dialReading(stopwatch({ banked: s(7) }), "stopwatch", T0)).toEqual({
+      value: 7,
+      at: 0,
+      rate: 0,
+    });
+    expect(dialReading(timer({ banked: m(2) }), "timer", T0)).toEqual({
+      value: 180,
+      at: 0,
+      rate: 0,
+    });
+  });
+
+  it("holds a timer that has run out at nothing", () => {
+    const t = start(timer(), T0, LATER);
+    expect(dialReading(t, "timer", T0 + m(6))).toEqual({
+      value: 0,
+      at: 0,
+      rate: 0,
+    });
   });
 });
 

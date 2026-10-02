@@ -204,6 +204,7 @@ export function Dial({
     readingAt(reading, reading.at),
     beats,
     reading.rate < 0 ? -1 : 1,
+    reading.value,
   );
 
   const markers = DIAL_HOURS.map((hour) => ({

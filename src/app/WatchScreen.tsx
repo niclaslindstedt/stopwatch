@@ -33,11 +33,9 @@ import { LiveReading, WatchRow, readingText } from "./WatchRow.tsx";
 import {
   TIMER_HOURS,
   TIMER_MINUTES,
-  elapsed,
+  dialReading,
   endsAt,
-  isRunning,
   partsOf,
-  remaining,
   stopwatchState,
   timerLeft,
   timerState,
@@ -113,24 +111,15 @@ export function WatchScreen({
   // What the dial is handed. A fresh stopwatch is at zero and a fresh timer
   // at what it is set to, both held; one that is out reads what it reads, and
   // moves while it runs — up for a stopwatch, down for a timer, until a timer
-  // reaches nothing.
-  const reading = useMemo<Reading>(() => {
-    if (!run) {
-      return heldAt(stopwatch ? 0 : watches.draftDuration / 1000);
-    }
-    if (stopwatch) {
-      return {
-        value: elapsed(run, now) / 1000,
-        at: now,
-        rate: isRunning(run) ? 1 : 0,
-      };
-    }
-    return {
-      value: remaining(run as Timer, now) / 1000,
-      at: now,
-      rate: running ? -1 : 0,
-    };
-  }, [run, stopwatch, now, running, watches.draftDuration]);
+  // reaches nothing — from the moment it was started rather than the moment
+  // this screen last ticked (`dialReading`).
+  const reading = useMemo<Reading>(
+    () =>
+      run
+        ? dialReading(run, mode, now)
+        : heldAt(stopwatch ? 0 : watches.draftDuration / 1000),
+    [run, mode, stopwatch, now, watches.draftDuration],
+  );
 
   const glow: GlowState = done ? "done" : running ? "running" : "off";
   const progress = !stopwatch && run ? timerLeft(run as Timer, now) : undefined;
