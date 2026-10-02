@@ -99,12 +99,6 @@ export type DialFaceSpec = {
   bezel: string;
   /** Whether the ink is light on dark. */
   dark: boolean;
-  /** The seconds hand's own colour. A stopwatch's big hand is painted, not
-   *  polished — red on a white dial, a warm orange on a black one — because
-   *  it is the hand the whole face is read by and has to be found in a
-   *  glance among the steel. Like the face, it is the watch's colour rather
-   *  than the theme's. */
-  chrono: string;
 };
 
 export const DIAL_FACES: DialFace[] = [
@@ -125,7 +119,6 @@ export const DIAL_FACE: Record<DialFace, DialFaceSpec> = {
     ink: "#1d1d1f",
     bezel: "#b9b9b4",
     dark: false,
-    chrono: "#c8102e",
   },
   // A textured silver-white, the default: the dial that reads in every light.
   silver: {
@@ -134,7 +127,6 @@ export const DIAL_FACE: Record<DialFace, DialFaceSpec> = {
     ink: "#1f2124",
     bezel: "#a4a6a8",
     dark: false,
-    chrono: "#c42b1c",
   },
   slate: {
     dial: "#5c6168",
@@ -142,7 +134,6 @@ export const DIAL_FACE: Record<DialFace, DialFaceSpec> = {
     ink: "#f4f5f6",
     bezel: "#8a8f96",
     dark: true,
-    chrono: "#ff8a3d",
   },
   black: {
     dial: "#232426",
@@ -150,7 +141,6 @@ export const DIAL_FACE: Record<DialFace, DialFaceSpec> = {
     ink: "#f2f2f0",
     bezel: "#6f7074",
     dark: true,
-    chrono: "#ff5a36",
   },
   blue: {
     dial: "#1f4b8f",
@@ -158,7 +148,6 @@ export const DIAL_FACE: Record<DialFace, DialFaceSpec> = {
     ink: "#f4f6fa",
     bezel: "#8d9bb3",
     dark: true,
-    chrono: "#ff7a45",
   },
   green: {
     dial: "#1f5a44",
@@ -166,7 +155,6 @@ export const DIAL_FACE: Record<DialFace, DialFaceSpec> = {
     ink: "#f1f5f2",
     bezel: "#8fa79b",
     dark: true,
-    chrono: "#f2b632",
   },
   burgundy: {
     dial: "#6b1f2c",
@@ -174,7 +162,6 @@ export const DIAL_FACE: Record<DialFace, DialFaceSpec> = {
     ink: "#f6ece8",
     bezel: "#a88a8d",
     dark: true,
-    chrono: "#f3d59b",
   },
   champagne: {
     dial: "#e6d3a3",
@@ -182,7 +169,6 @@ export const DIAL_FACE: Record<DialFace, DialFaceSpec> = {
     ink: "#3a2c14",
     bezel: "#b39a5e",
     dark: false,
-    chrono: "#8e1b1b",
   },
 };
 

@@ -14,9 +14,10 @@ Which tab is open is remembered per device.
 ## The dial
 
 The big hand from the centre is the seconds, round a scale numbered 5 to 60.
-The small dial at three is the minutes, once round an hour, jumping a minute
-at a time; the small dial at nine is the hours, once round twelve, creeping
-between its marks. A stopwatch's hands count up; a timer's count down, and
+The small dial at three is the minutes, once round an hour; the small dial at
+nine is the hours, once round twelve. Both hands sweep with the reading on
+every frame rather than stepping, so each is read off where it stands between
+its marks. A stopwatch's hands count up; a timer's count down, and
 for a timer the bezel is drawn too — from twelve, clockwise, in the accent,
 for the share of the timer still to run, shrinking as it runs. How the dial
 looks — its face, markers, numerals, ring, hands and movement — is chosen in

@@ -77,9 +77,9 @@ import { useHands } from "./useHands.ts";
 // way a chronograph's are, with the fine circular graining of a turned
 // counter: the minutes at three, once round an hour and numbered at the
 // quarters, and the hours at nine, once round twelve. Each has its own steel
-// hand. The big hand from the centre is the seconds, painted in the face's
-// own colour for it (`chrono` in `look.ts`) rather than polished, because it
-// is the hand the whole face is read by.
+// hand. The big hand from the centre is the seconds, a hair in the face's
+// ink rather than polished — too fine to carry a facet, and dark on a light
+// dial the way the time report's is.
 //
 // The printing is what a dial carries besides its scale: the maker's name
 // under twelve, with the mark beside it, the movement's word in small
@@ -613,10 +613,10 @@ export function Dial({
             set={handSet}
             length={layout.hands.second}
             width={HANDS.second}
-            ink={face.chrono}
+            ink={face.ink}
           />
         </g>
-        <circle cx={C} cy={C} r={HANDS.cap} fill={face.chrono} />
+        <circle cx={C} cy={C} r={HANDS.cap} fill={face.ink} />
         <circle cx={C} cy={C} r={1.2} fill={face.dial} />
       </g>
     </svg>
@@ -998,8 +998,8 @@ function Hand({
  *  it past the axle — the disc of a sports hand on a stub of the same hair,
  *  or the blade of a dress watch, which leaves the hub as the same hair and
  *  widens as it goes, so the weight is out at the end of it. Painted in the
- *  face's own colour for it whatever the rest of the set is made of: it is
- *  the hand the stopwatch is read by. */
+ *  face's ink whatever the rest of the set is made of: a hair that fine has
+ *  no surface to polish. */
 function SecondHand({
   set,
   length,

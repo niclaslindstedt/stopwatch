@@ -859,9 +859,12 @@ export function registerLabels(
 // arrived at: a stepper drives the hand a little past the mark and back,
 // which is most of what tells a quartz apart from a dial that redraws.
 //
-// The minute register jumps a minute at a time, as a chronograph's does, and
-// the hour register creeps — the hours are read off where its hand stands
-// between two marks.
+// The two registers do not step at all. Their hands sweep with the reading
+// itself, frame by frame, the way a watch's minute and hour hands do: the
+// minutes a tenth of a degree a second, the hours a hair of that — a hand
+// that is seen to be alive rather than one that waits a minute to move. The
+// minutes and the hours are read off where each hand stands between two
+// marks.
 //
 // And a reading that jumps — a stopwatch reset to zero, another one put on
 // the dial, a tab woken after an hour — is not teleported. Each hand travels
@@ -937,12 +940,12 @@ export function chronoTurns(
     const since = Math.abs(v - beat) * 1000;
     landing = (6 / beats) * (1 - easeOutBack(since / span));
   }
-  // The register counts whole minutes of the reading the seconds hand shows,
-  // so the two never disagree about which minute it is.
+  // The registers sweep with the reading itself rather than the beat, so
+  // they move on every frame whatever the movement.
   const whole = beats === null ? v : beat;
   return {
     second: (whole % 60) * 6 - dir * landing,
-    minute: (Math.floor(whole / 60 + 1e-9) % 60) * 6,
+    minute: ((v / 60) % 60) * 6,
     hour: ((v / 3600) % 12) * 30,
   };
 }
