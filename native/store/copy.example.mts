@@ -35,8 +35,8 @@ const EN_US: AppleInfo = {
 
   // 10–4000. The first two lines are all the store shows before "more".
   description: `DESCRIPTION — the hook in the first two lines, then what the
-player actually does, then what makes this one unusual. Up to 4000 characters,
-read on a phone.`,
+reader times with it (stopwatches, timers, several at once), then what makes
+this one unusual. Up to 4000 characters, read on a phone.`,
 
   // The JOINED string is what must fit 100 characters, not each term.
   keywords: ["keyword", "budget", "spent", "joined"],
@@ -62,10 +62,11 @@ export const APPLE_INFO: Record<string, AppleInfo> = { "en-US": EN_US };
  * real notes against the build — see the `store-listing` skill.
  */
 export const APPLE_REVIEW_NOTES = `REVIEW NOTES — no account is needed; what
-the app does; that the whole app ships inside the binary and works in airplane
-mode (guideline 4.2); what the native layer adds; that nothing is sold and no
-data is collected; which permission, if any, the app asks for and why; and
-the privacy page, which the listing also points at:
+the app does (stopwatches and timers on one watch face; how to start one, and
+how to make a timer ring in a minute); that the whole app ships inside the
+binary and works in airplane mode (guideline 4.2); what the native layer adds;
+that nothing is sold and no data is collected; which permission, if any, the
+app asks for and why; and the privacy page, which the listing also points at:
 https://apps.agilator.se/stopwatch/privacy/`;
 
 // NO MAC OR STEAM COPY HERE. `listing.mts` says this app ships on the App

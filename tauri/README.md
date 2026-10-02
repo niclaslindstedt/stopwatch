@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0 -->
 
-# Time — the desktop app
+# Stopwatch — the desktop app
 
-A desktop wrapper around Time for **Windows, macOS and Linux**. It is a thin
+A desktop wrapper around Stopwatch for **Windows, macOS and Linux**. It is a thin
 [Tauri](https://tauri.app) shell whose entire content is the built website, so
 the app **looks and works exactly like the site** — and because the site is
 bundled inside it and served from a private scheme, it works with no network at
@@ -11,7 +11,7 @@ all and is an app rather than a viewer for a web page.
 **Thin is the specification, not a stage it is passing through.** The page is
 never told it is in here: there is no initialization script, no injected
 global, no Tauri command, and no permission on the window beyond Tauri's own
-minimum. Everything Time does — the document, the settings, the sync engine —
+minimum. Everything Stopwatch does — the document, the settings, the sync engine, the alarm —
 it does through the ordinary browser APIs it already uses in a tab. That is why
 running here needed no change to the app at all, and it is the property to keep:
 a feature that only exists in the desktop build is a second product.
@@ -59,8 +59,9 @@ crate. The app crate has no tests of its own by design.
 
 ## How the pieces fit
 
-**The origin is the one thing to be careful with.** The user's days live in
-IndexedDB and their settings in `localStorage`, both keyed by origin, so
+**The origin is the one thing to be careful with.** The user's stopwatches and
+settings live in `localStorage`, and a paired storage server's keys in
+IndexedDB, all keyed by origin, so
 `APP_SCHEME` and `APP_HOST` (`shell/src/config.rs`) are constants that must
 never be tidied — renaming either orphans every document on the machine.
 WebView2 maps a registered scheme onto `http://<scheme>.localhost`; WKWebView
@@ -69,8 +70,8 @@ platform, which is the property that matters.
 
 **Not `file://`, for the same reason.** The site is built with `base: "/"`, so
 its absolute asset paths and ES-module imports need a real origin — and a
-`file://` page is an opaque origin, which would leave the days unable to
-survive a launch.
+`file://` page is an opaque origin, which would leave the stopwatches unable
+to survive a launch.
 
 **The bundled site carries no service worker.** `scripts/bundle-web.mjs` builds
 it with `VITE_SHELL_BUILD=on`, which switches off the worker half of the root
@@ -127,10 +128,10 @@ this tree's edge, because it has its own toolchain.
 Both are for developing rather than for shipping; an installed copy has nothing
 to set.
 
-| Variable       | Effect                                                               |
-| -------------- | -------------------------------------------------------------------- |
-| `TIME_APP_URL` | Load a remote URL instead of the bundled site (the `/preview/` slot) |
-| `TIME_WEBROOT` | Serve the site from somewhere else without rebuilding                |
+| Variable            | Effect                                                               |
+| ------------------- | -------------------------------------------------------------------- |
+| `STOPWATCH_APP_URL` | Load a remote URL instead of the bundled site (the `/preview/` slot) |
+| `STOPWATCH_WEBROOT` | Serve the site from somewhere else without rebuilding                |
 
 ## Releasing
 
@@ -150,7 +151,7 @@ identifier it installs under arrive at packaging time, as the phone app's do:
 identity; the release workflow passes `--require-identity` and refuses it.
 **The identifier is also where the data lives** — each desktop webview keys its
 storage by it — so changing it after a release strands every installed copy's
-days.
+stopwatches.
 
 ### Nothing else to do
 

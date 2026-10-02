@@ -151,7 +151,7 @@ module.exports = () => ({
       // report bundled inside it (assets/webroot.zip) from a loopback server —
       // that is what makes it work offline, and what makes it an app rather
       // than a viewer for a website (App Store guideline 4.2). To point a
-      // debug build at a deployed slot, set EXPO_PUBLIC_TIME_URL at build
+      // debug build at a deployed slot, set EXPO_PUBLIC_STOPWATCH_URL at build
       // time; src/config.ts reads that env var directly.
       ...(EAS_PROJECT_ID ? { eas: { projectId: EAS_PROJECT_ID } } : {}),
     },

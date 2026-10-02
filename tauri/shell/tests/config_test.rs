@@ -72,7 +72,7 @@ fn anything_else_does_not() {
     }
 }
 
-/// A launch pointed at a remote build (`TIME_APP_URL`) navigates within THAT
+/// A launch pointed at a remote build (`STOPWATCH_APP_URL`) navigates within THAT
 /// site too — otherwise every in-app link would bounce to the browser.
 #[test]
 fn a_remote_launch_navigates_within_its_own_site() {

@@ -10,8 +10,8 @@
 //! | a checkout (`cargo run`) | `tauri/webroot/`, beside the crate |
 //! | a packaged app           | in the bundle's resource directory  |
 //!
-//! `TIME_WEBROOT` overrides both, which is what lets a build serve a site from
-//! somewhere else without recompiling — the same escape hatch `TIME_APP_URL`
+//! `STOPWATCH_WEBROOT` overrides both, which is what lets a build serve a site from
+//! somewhere else without recompiling — the same escape hatch `STOPWATCH_APP_URL`
 //! gives for a REMOTE site.
 
 use std::fs;
@@ -24,7 +24,7 @@ use tauri::{AppHandle, Manager};
 
 /// Where the bundled site is, for this shape of app.
 pub fn webroot_dir(app: &AppHandle) -> PathBuf {
-    if let Some(override_dir) = std::env::var_os("TIME_WEBROOT") {
+    if let Some(override_dir) = std::env::var_os("STOPWATCH_WEBROOT") {
         return PathBuf::from(override_dir);
     }
     // The packaged answer first, because a developer running a packaged build

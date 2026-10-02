@@ -7,8 +7,8 @@
 //! and offline and changes only when a new binary ships.
 //!
 //! Two launch-time overrides exist and both are for developing rather than for
-//! shipping: `TIME_APP_URL` points the window at a remote URL instead (the
-//! `/preview/` deploy slot, say), and `TIME_WEBROOT` serves a different
+//! shipping: `STOPWATCH_APP_URL` points the window at a remote URL instead (the
+//! `/preview/` deploy slot, say), and `STOPWATCH_WEBROOT` serves a different
 //! directory without rebuilding the binary.
 
 /// The private scheme the bundled site is served from.
@@ -52,7 +52,7 @@ pub const MIN_HEIGHT: f64 = 480.0;
 /// A remote URL to load instead of the bundled site, or `None` to serve the
 /// copy inside the app.
 pub fn remote_app_url() -> Option<String> {
-    std::env::var("TIME_APP_URL")
+    std::env::var("STOPWATCH_APP_URL")
         .ok()
         .filter(|url| !url.is_empty())
 }

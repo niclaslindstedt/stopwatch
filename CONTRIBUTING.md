@@ -1,4 +1,4 @@
-# Contributing to time
+# Contributing to stopwatch
 
 Thanks for your interest! This document describes how to set up a dev
 environment, the conventions we follow, and how to get a change merged.
@@ -14,7 +14,7 @@ environment, the conventions we follow, and how to get a change merged.
 
 ```sh
 git clone https://github.com/niclaslindstedt/stopwatch.git
-cd time
+cd stopwatch
 npm install
 ```
 
@@ -81,15 +81,16 @@ dependency of the app — the script says how to install it outside the lockfile
 ## Tests
 
 Tests live in `tests/` with a `_test` suffix and cover the
-pure domain modules — the interval arithmetic, the day derivation, the edits,
-the report, the clock geometry, the document merge, and the storage
-migrations. Run one file with `npx vitest run tests/day_test.ts`. UI changes
-should keep the boot smoke path working: `npm run build && npm run preview`,
-add a project, press the clock, and check that the light comes up and the
-Log shows the session.
+pure modules — the readings and edits of a stopwatch and a timer, the dial's
+geometry and how its hands move, the dial vocabulary, the formatting, when a
+timer is announced, the document merge, and the storage migrations. Run one
+file with `npx vitest run tests/watch_test.ts`. UI changes should keep the
+boot smoke path working: `npm run build && npm run preview`, press the dial,
+check that the light comes up and the stopwatch is listed under the controls,
+then set a one-minute timer and let it ring.
 
-The derivation is deliberately clock-free — `now` and `today` are parameters,
-never `new Date()` inside `day.ts` or `report.ts` — so a test never needs fake
+The readings are deliberately clock-free — `now` is a parameter, never
+`Date.now()` inside `watch.ts` or `clock.ts` — so a test never needs fake
 timers. Keep it that way.
 
 ## Documentation

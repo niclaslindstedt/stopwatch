@@ -112,17 +112,18 @@ build without it launches to a blank screen.
 
 - [ ] `make lint && make test && make build` is green at the repo root.
 - [ ] `make native-typecheck` is green.
-- [ ] `EXPO_PUBLIC_TIME_URL` is **unset** — a build that streams the website
+- [ ] `EXPO_PUBLIC_STOPWATCH_URL` is **unset** — a build that streams the website
       is the exact shape App Store guideline 4.2 rejects.
 - [ ] The version in the root `package.json` is the one you mean to ship.
 - [ ] On a real device signed into iCloud: **Settings → Cloud sync → iCloud
-      Drive**, log a day, and see `stopwatch.json` appear under **Files → iCloud
-      Drive → Time**. Then sign out of iCloud and confirm the app says so
-      rather than losing the day.
+      Drive**, start a stopwatch, and see `stopwatch.json` appear under
+      **Files → iCloud Drive → Stopwatch**. Then sign out of iCloud and
+      confirm the app says so rather than losing the stopwatch.
 - [ ] **Settings → Cloud sync → Dropbox** opens Dropbox in a sheet over the
       app (not in Safari), and approving closes the sheet and connects.
       Closing the sheet instead leaves the backend as it was.
-- [ ] Report → **…** → the specification's **Download PDF** opens the share
-      sheet, and **Save to Files** writes
-      `<project>_<period>_specification.pdf`; the same for the invoice file and
-      **Settings → Download a backup**. Nothing opens Safari.
+- [ ] **Settings → Download a backup** opens the share sheet, and **Save to
+      Files** writes the dated backup file. Nothing opens Safari.
+- [ ] Set a one-minute timer and let it run out with the app open: the light
+      turns the warning colour, the notice shows, and the chime and the buzz
+      come with it.

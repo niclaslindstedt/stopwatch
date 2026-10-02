@@ -1,6 +1,6 @@
 # The store listing
 
-Everything App Store Connect needs for Time's product page, compiled from one
+Everything App Store Connect needs for Stopwatch's product page, compiled from one
 authored source and uploaded with fastlane.
 
 ```sh
@@ -19,7 +19,7 @@ make store-upload        # the listing text + screenshots → App Store Connect
 | `screenshots/en-US/`            | Upload-ready PNGs at Apple's exact rasters                     | no         |
 | `../fastlane/Appfile, Fastfile` | The upload lane — identity from `APP_BUNDLE_ID`                | yes        |
 
-Time ships on the **App Store** alone — iPhone and iPad. `listing.mts`
+Stopwatch ships on the **App Store** alone — iPhone and iPad. `listing.mts`
 declares that, and neither tool asks for what a storefront that is off would
 need.
 
@@ -61,8 +61,8 @@ website.
 
 ## The screenshots
 
-Taken of **the real app on its demo data**: `VITE_SEED=demo` builds Time
-onto one developer's working weeks held in memory (`src/app/dev/demoData.ts`;
+Taken of **the real app on its demo data**: `VITE_SEED=demo` builds Stopwatch
+onto an afternoon of stopwatches and timers held in memory (`src/app/dev/demoData.ts`;
 `make demo` to try it), and each frame is staged on it at the device's real
 viewport, with the real iOS status bar. The set is produced outside this
 repository and staged into `screenshots/en-US/` before an upload:

@@ -9,13 +9,14 @@
 // website — App Store guideline 4.2 (minimum functionality) rejects the
 // latter.
 //
-// `EXPO_PUBLIC_TIME_URL` overrides that at build time, pointing the WebView at
+// `EXPO_PUBLIC_STOPWATCH_URL` overrides that at build time, pointing the WebView at
 // a deployed slot instead (the `/preview/` one, say, or a dev server on the
 // LAN). Debugging only: a store build must not set it.
 
 /** A remote URL to load instead of the bundled build, or undefined to serve
  *  the bundle locally. */
-export const REMOTE_URL: string | undefined = process.env.EXPO_PUBLIC_TIME_URL;
+export const REMOTE_URL: string | undefined =
+  process.env.EXPO_PUBLIC_STOPWATCH_URL;
 
 /** The fallback chrome, shown before the page has reported its theme (launch,
  *  over-scroll, the failure screen). The light theme's page background, the

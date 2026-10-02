@@ -30,9 +30,9 @@ interface ImportMetaEnv {
   readonly VITE_DROPBOX_APP_KEY?: string;
   // App-folder names the synced document is filed under, per provider.
   readonly VITE_DROPBOX_APP_FOLDER?: string;
-  // Which build this is: "store" for the one sold in the App Store, anything
-  // else (including unset) for the free web edition, whose exported
-  // specifications carry the notice. See `src/app/edition.ts`.
+  // Which build this is: "store" for the phone wrapper's store edition, which
+  // carries no link back to the source (`websiteOnly` in `vite.config.ts`);
+  // anything else, including unset, is the website.
   readonly VITE_EDITION?: string;
   // "demo" boots the app onto the in-memory demo document, and nothing else:
   // `make demo` and the store screenshots. See `src/app/dev/useDemoData.ts`.

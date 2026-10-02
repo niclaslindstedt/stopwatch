@@ -25,7 +25,7 @@ description: "Use before opening a PR with any user-visible change, to add the c
    git log --oneline origin/main..HEAD
    ```
 
-2. Decide whether it is user-visible: would someone using the app notice, without reading the source? A new control, a changed default, a fixed wrong number, a faster start — yes. A renamed internal helper — no.
+2. Decide whether it is user-visible: would someone using the app notice, without reading the source? A new control, a changed default, a fixed wrong reading, a faster start — yes. A renamed internal helper — no.
 
 3. Check whether a fragment already exists for it:
 
@@ -48,19 +48,20 @@ description: "Use before opening a PR with any user-visible change, to add the c
 
 ## Mapping
 
-| Changed source                                          | Fragment needed                           |
-| ------------------------------------------------------- | ----------------------------------------- |
-| `src/app/*Screen.tsx`, `BottomNav.tsx`, `ClockFace.tsx` | Yes — the UI moved                        |
-| `src/app/day.ts`, `report.ts`, `actions.ts`             | Yes — the numbers a user reads changed    |
-| `src/app/useSyncEngine.ts`, `merge.ts`                  | Yes — sync behaviour is user-visible      |
-| `src/app/types.ts`, `migrations.ts`                     | Yes, and consider `breaking: true`        |
-| `src/app/i18n/en.ts` alone                              | Only if the wording change alters meaning |
-| `tests/`, `docs/`, `.github/`, config                   | No                                        |
+| Changed source                                          | Fragment needed                                                                 |
+| ------------------------------------------------------- | ------------------------------------------------------------------------------- |
+| `src/app/*Screen.tsx`, `BottomNav.tsx`, `WatchFace.tsx` | Yes — the UI moved                                                              |
+| `src/app/Dial.tsx`, `clock.ts`, `look.ts`               | Yes — the dial looks or moves differently                                       |
+| `src/app/watch.ts`, `useWatches.ts`, `useAlarm.ts`      | Yes — what a reading says, or what a press or a timer running out does, changed |
+| `src/app/useSyncEngine.ts`, `merge.ts`                  | Yes — sync behaviour is user-visible                                            |
+| `src/app/types.ts`, `migrations.ts`                     | Yes, and consider `breaking: true`                                              |
+| `src/app/i18n/en.ts` alone                              | Only if the wording change alters meaning                                       |
+| `tests/`, `docs/`, `.github/`, config                   | No                                                                              |
 
 ## Update checklist
 
 - [ ] Write the fragment (see the shape below)
-- [ ] Title is a short noun phrase, not a commit subject ("Breaks by kind", not "feat: add break chart")
+- [ ] Title is a short noun phrase, not a commit subject ("Timers that ring", not "feat: add alarm")
 - [ ] Body is **one sentence**, in the user's vocabulary — no file names, no symbol names, no "refactored"
 - [ ] For a substantial feature, add a `[Learn more](feature:<slug>)` link and make sure `docs/features/<slug>.md` exists
 - [ ] Preview the bump the release will derive: `make bump`

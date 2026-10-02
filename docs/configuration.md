@@ -46,11 +46,11 @@ never by the web app. See
 [`../native/.env.example`](../native/.env.example) and
 [`../native/RELEASING.md`](../native/RELEASING.md).
 
-| Variable               | Effect                                                                                                                          |
-| ---------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
-| `EXPO_PUBLIC_TIME_URL` | Point the wrapper's WebView at a deployed slot instead of the copy bundled inside it. **Debugging only** — never a store build. |
-| `EAS_PROJECT_ID`       | The EAS project a build runs under. `eas init` prints it but cannot write it into a dynamic config, so it is passed in.         |
-| `EXPO_TOKEN`           | An Expo access token, so CI can drive EAS with no interactive login. A repository secret; treat it as a password.               |
+| Variable                    | Effect                                                                                                                          |
+| --------------------------- | ------------------------------------------------------------------------------------------------------------------------------- |
+| `EXPO_PUBLIC_STOPWATCH_URL` | Point the wrapper's WebView at a deployed slot instead of the copy bundled inside it. **Debugging only** — never a store build. |
+| `EAS_PROJECT_ID`            | The EAS project a build runs under. `eas init` prints it but cannot write it into a dynamic config, so it is passed in.         |
+| `EXPO_TOKEN`                | An Expo access token, so CI can drive EAS with no interactive login. A repository secret; treat it as a password.               |
 
 ## Runtime settings
 

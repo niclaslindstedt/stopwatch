@@ -28,7 +28,7 @@ git diff --name-only "${BASELINE:-$(git rev-list --max-parents=0 HEAD)}"..HEAD
 1. Diff from the baseline and pick out changes to `Makefile`, `package.json`, `src/vite-env.d.ts`, `.github/workflows/`, `docs/`, and `src/app/*Screen.tsx`.
 2. Read the README end to end. The twelve sections must all still be present and in order: What / Why / Prerequisites / Install / Quick start / Usage / Configuration / Examples / Troubleshooting / Documentation / Contributing / License.
 3. Run the Quick start commands as written, from the repo root, and confirm they do what the README says they do.
-4. Check the Examples block still type-checks against the current API — it is real code, and the app's exported shapes move.
+4. Check the Examples block still runs against the current API — it is real code over `src/app/watch.ts`, and the app's exported shapes move. `node --experimental-strip-types` runs it as written.
 
 ## Mapping
 
@@ -36,8 +36,9 @@ git diff --name-only "${BASELINE:-$(git rev-list --max-parents=0 HEAD)}"..HEAD
 | -------------------------------------- | ------------------------------------------------ |
 | `Makefile`, `package.json` scripts     | Quick start; the command list in `AGENTS.md` too |
 | `src/vite-env.d.ts`, `vite.config.ts`  | Configuration table                              |
-| `src/app/day.ts`, `actions.ts` exports | Examples block                                   |
+| `src/app/watch.ts` exports             | Examples block                                   |
 | `src/app/*Screen.tsx`, `BottomNav.tsx` | Usage table                                      |
+| `src/app/shortcuts.ts`                 | Keyboard shortcuts table (under Usage)           |
 | `docs/*.md` added or renamed           | Documentation list                               |
 | `.github/workflows/*.yml`              | Badge row                                        |
 | `LICENSE`                              | License section and the license badge            |

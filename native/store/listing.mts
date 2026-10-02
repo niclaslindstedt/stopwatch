@@ -212,10 +212,11 @@ export const RULES: StoreRules = {
   },
 
   apple: {
-    // A stopwatch document. PRODUCTIVITY is the aisle a person looking for one
-    // browses; BUSINESS second, because the hours it totals are usually
-    // hours somebody invoices.
-    categories: ["PRODUCTIVITY", "BUSINESS"],
+    // Stopwatches and timers. PRODUCTIVITY is the aisle a person looking for
+    // one browses; UTILITIES second, because a stopwatch and a kitchen timer
+    // are the oldest utilities a phone has, and it is where the clock and the
+    // calculator are shelved.
+    categories: ["PRODUCTIVITY", "UTILITIES"],
 
     advisory: {
       // Every row is NONE, and none of them is a judgement call: this is a
@@ -229,9 +230,9 @@ export const RULES: StoreRules = {
       sexualContentOrNudity: "NONE",
       sexualContentGraphicAndNudity: "NONE",
       alcoholTobaccoOrDrugUseOrReferences: "NONE",
-      // The app records hours and the kind of work they were, one of which
-      // may be a healthcare appointment the reader labelled. It provides no
-      // medical information of its own, and gives no advice.
+      // The app times what the reader names, which may be a plank or a dose
+      // they chose to time. It provides no medical information of its own,
+      // and gives no advice.
       medicalOrTreatmentInformation: "NONE",
       gamblingSimulated: "NONE",
       gambling: false,
