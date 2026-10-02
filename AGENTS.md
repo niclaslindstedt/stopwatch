@@ -152,7 +152,9 @@ like SVG's `focusable` as `"false"` rather than a JSX boolean.
   the states (`stopwatchState`: running / paused / idle / stopped;
   `timerState` adds done), `timerLeft` (the bezel's share), the lists
   (`listOf`, `activeOf` — newest first, a tombstone never shown) and
-  `focusedOf`, which one of a kind the dial shows. Edits, each a run in and a
+  `focusedOf`, which one of a kind the dial shows, and `dialReading`, what
+  the dial is handed — a running one anchored at `startedAt`, never at a
+  screen's last tick. Edits, each a run in and a
   run out with the timestamp handed in: `start`, `pause`, `toggle`, `reset`,
   `stop` (put away), `restart`, `rename`, `setDuration`, `remove` (a
   tombstone). A timer that has run out starts again from the top, and banks

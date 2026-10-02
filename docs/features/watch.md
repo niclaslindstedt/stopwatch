@@ -26,7 +26,9 @@ Settings; see [`themes.md`](themes.md).
 **The whole watch is the button.** Pressing it starts the one on the dial,
 pressing it again holds it, and pressing it once more carries on from where it
 was held. There is no other start button on the screen. `S` does the same on a
-keyboard.
+keyboard. The hands keep time from the moment of the press itself: the first
+beat comes one beat after it, and a held hand sits on its mark, so starting
+moves nothing until there is something to move.
 
 On a fresh dial — the first time, or after **New** — there is nothing yet: the
 stopwatch reads zero, or the timer reads the time it is set for, and the press

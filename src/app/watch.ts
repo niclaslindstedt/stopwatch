@@ -12,6 +12,7 @@
 // The edits are pure too: a run in, a new run out, with the edit's timestamp
 // handed in (`stamp`) rather than read, the way ids are.
 
+import type { Reading } from "./clock.ts";
 import type {
   AppData,
   Millis,
@@ -85,6 +86,38 @@ export function timerState(timer: Timer, now: Millis): TimerState {
 export function timerLeft(timer: Timer, now: Millis): number {
   if (timer.duration <= 0) return 0;
   return remaining(timer, now) / timer.duration;
+}
+
+/**
+ * What the dial is handed for a run: its reading as a value at a moment and a
+ * rate. A running one is anchored at the moment its stretch started — the
+ * bank at `startedAt`, moving from there — never at the moment a screen last
+ * ticked. A screen that ticks once a second reads `now` up to a second before
+ * the press that started the run, and a reading anchored there runs ahead of
+ * the run by that much until the next tick pulls it back: the hand steps
+ * early, then steps back, then steps again. Held — paused, idle, put away, or
+ * a timer that has run out — it is simply what the run reads at `now`.
+ */
+export function dialReading(
+  run: Run | Timer,
+  kind: WatchKind,
+  now: Millis,
+): Reading {
+  if (kind === "stopwatch") {
+    if (run.startedAt !== null) {
+      return { value: run.banked / 1000, at: run.startedAt, rate: 1 };
+    }
+    return { value: elapsed(run, now) / 1000, at: 0, rate: 0 };
+  }
+  const t = run as Timer;
+  if (timerState(t, now) === "running" && t.startedAt !== null) {
+    return {
+      value: Math.max(0, t.duration - t.banked) / 1000,
+      at: t.startedAt,
+      rate: -1,
+    };
+  }
+  return { value: remaining(t, now) / 1000, at: 0, rate: 0 };
 }
 
 /** Every one of a kind that has not been removed, newest first. */
