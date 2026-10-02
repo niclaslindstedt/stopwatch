@@ -173,12 +173,12 @@ like SVG's `focusable` as `"false"` rather than a JSX boolean.
   now, `chronoTurns` is the three hands for it — the seconds stepped to the
   movement's beat (down while counting up, up while counting down, so a
   timer's hand reads the second its figure does) and landed with
-  `easeOutBack`, the minute register jumping a minute at a time, the hour
-  register creeping — and `glidePlan` / `glideTurns` are the fly-back of a
+  `easeOutBack`, the two registers sweeping with the reading itself on
+  every frame — and `glidePlan` / `glideTurns` are the fly-back of a
   reset and the wind after a sleeping tab: each hand travels the way the
   reading went, never more than a turn, on `easeInOutSine`. Pure.
 - `src/app/look.ts` — the app's two themes, and the dial's vocabulary: the
-  eight faces (each with its own `chrono` colour for the seconds hand), nine
+  eight faces (the seconds hand is printed in the face's ink), nine
   typefaces, nine marker styles, eight marker sizes, three placements, two
   rings (a groove, or the printed seconds ring), two shapes of hand, three
   movements, and the nine presets they combine into. Also `STEEL`,
@@ -267,7 +267,7 @@ like SVG's `focusable` as `"false"` rather than a JSX boolean.
   app's mark and name under twelve, the movement's word under them, and a
   window above six with the cog — the two registers (a sunken floor with a
   turned finish, their marks and numbers, and a steel hand each), and the big
-  seconds hand in the face's `chrono` colour. Paint only, so the same drawing
+  seconds hand in the face's ink. Paint only, so the same drawing
   serves the main screen and the preset cards in Settings.
 - `src/app/WatchRow.tsx` — one stopwatch or timer as a row, shared by the
   running list and the two pages; `LiveReading` ticks its own figure at the
@@ -599,8 +599,8 @@ with `[Learn more](feature:<slug>)`.
 - **Two themes only** — one light, one dark, plus "follow the device". The
   one deliberate exception is the watch **face** (`DIAL_FACE` in `look.ts`):
   a watch face has a colour the way an object does, not the way a theme does —
-  a black dial is black on the light theme — and so has its seconds hand
-  (`chrono`). Its ink, bezel, gradient and hand never reach the UI around it;
+  a black dial is black on the light theme — and so has the ink its
+  seconds hand is printed in. Its ink, bezel, gradient and hand never reach the UI around it;
   what the theme puts on the dial is a timer's time left on the bezel, in the
   accent. Everything else about the dial is shape, not colour; the applied
   parts are `STEEL`, lit by `sheen.ts`.

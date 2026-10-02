@@ -50,7 +50,7 @@ first, because that is where the vocabulary last grew.
 
    | On the watch                                                                  | Dimension   | Table                    |
    | ----------------------------------------------------------------------------- | ----------- | ------------------------ |
-   | The dial's colour, its ink, its bezel, and the seconds hand's own colour      | `face`      | `DIAL_FACE`              |
+   | The dial's colour, its ink (the seconds hand's too), and its bezel            | `face`      | `DIAL_FACE`              |
    | How the five-second marks are made, and what sits at 60                       | `markers`   | `DIAL_MARKERS`, `Marker` |
    | The typeface of any numeral or printed second                                 | `font`      | `DIAL_FONT`              |
    | How big the markers are                                                       | `scale`     | `DIAL_SCALE`             |
@@ -121,7 +121,7 @@ is all the app should.
 | To add                                    | Change                                                                                                                                                                                                                                                                                                                                              |
 | ----------------------------------------- | --------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 | A preset                                  | `DialPreset`, `DIAL_PRESETS`, `DIAL_PRESET` in `look.ts`; `settings.preset.<id>` and `settings.presetHint.<id>` in `en.ts`; the presets table in `docs/features/themes.md`; the count in `tests/look_test.ts` and the "eight/nine" wording in `CLAUDE.md`, the README and `look.ts`'s comments                                                      |
-| A face colour                             | `DialFace`, `DIAL_FACES`, `DIAL_FACE` (dial, edge, ink, bezel, dark, chrono) in `look.ts` — `chrono` is the seconds hand's own colour, painted rather than polished, and has to be found at a glance on that face; its light in `FACE_BACKLIGHT`; `settings.face.<id>` in `en.ts`; `tests/look_test.ts` checks the ink reads against the dial       |
+| A face colour                             | `DialFace`, `DIAL_FACES`, `DIAL_FACE` (dial, edge, ink, bezel, dark) in `look.ts` — the seconds hand is printed in the face's `ink`; its light in `FACE_BACKLIGHT`; `settings.face.<id>` in `en.ts`; `tests/look_test.ts` checks the ink reads against the dial                                                                                     |
 | A marker style                            | `DialMarkers`, `DIAL_MARKER_STYLES`, `DIAL_MARKERS` (`at(hour)`, `minuteTrack`, `width`, `reachesRing`) in `look.ts`; a `Marker` kind if the shape is new, drawn at twelve in `Dial.tsx`'s `Marker` and rotated into place; `settings.markers.<id>` in `en.ts`; the layout and register walks in `tests/clock_test.ts` cover it                     |
 | A typeface                                | `DialFont`, `DIAL_FONTS`, `DIAL_FONT` (family, weight, widthFactor, scale) in `look.ts`; the `@fontsource` import in `src/main.tsx` — one weight, the `latin` subset, never a font host; `settings.font.<id>` in `en.ts`; the fonts list in `CLAUDE.md`'s dependency rule and `themes.md`                                                           |
 | A set of hands                            | `DialHands`, `DIAL_HAND_SETS`, `DIAL_HANDS` (base, tip, taper, steel, counterweight) in `look.ts`; the drawing in `Dial.tsx`'s `Hand` / `SecondHand`, both at twelve o'clock inside the group `useHands` rotates; `settings.hands.<id>`, `settings.handsHint.<id>` in `en.ts`; a picker under Custom in `DialPicker.tsx`; a fallback in `parseDial` |
@@ -163,7 +163,7 @@ their own centres, as long as `Register.hand`. A hand wider at the boss than
 the cap over its axle (`HANDS.cap`, `HANDS.registerCap`) shows its own root,
 so a taper's `base` is measured against the width `HANDS` gives it rather than
 chosen freely. The seconds hand is too thin to carry a facet: give it a shape
-and the face's `chrono` colour, not two tones.
+and the face's `ink`, not two tones.
 
 A printed ring's numerals go on `bandR` — 05 round to 60, a stopwatch's own
 scale — with its ticks on the ring's inner edge (`chapterTracks`). Numerals

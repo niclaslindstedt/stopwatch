@@ -14,7 +14,8 @@ palette is another surface to keep legible.
 choosing, and it is the one place a colour of its own is allowed: the watch is
 drawn as a stopwatch — a chronograph — and a watch face has a colour the way
 an object does, not the way a theme does. A black dial is black on the light
-theme and a white one white on the dark, and so is its seconds hand. Nothing
+theme and a white one white on the dark, and so is the ink it is printed in.
+Nothing
 on the face is the theme's but a timer's time left, drawn round the bezel in
 the accent, so the dial can be any of its eight faces without a second
 palette leaking into the app around it. Stopwatches and timers wear the same
@@ -26,11 +27,12 @@ The big hand from the centre is the **seconds**, once round a minute, read
 against a scale numbered the way a stopwatch's is: its twelve big marks are
 the five-second ones, so a numeral says 5, 10 … 55 and 60 at the top, where a
 clock's says 1 to 12 — V to LX on a Roman dial. The small dial at **three**
-counts the minutes, once round an hour, numbered 15, 30, 45 and 60, and its
-hand jumps a minute at a time the way a chronograph's minute counter does. The
-small dial at **nine** counts the hours, once round twelve, numbered 3, 6, 9
-and 12, and its hand creeps — the hours are read off where it stands between
-two marks.
+counts the minutes, once round an hour, numbered 15, 30, 45 and 60. The small
+dial at **nine** counts the hours, once round twelve, numbered 3, 6, 9 and 12.
+Neither register steps: their hands sweep with the reading on every frame,
+whatever the movement — the minute hand a tenth of a degree a second, the hour
+hand a hair of that — and the minutes and hours are read off where each hand
+stands between two marks.
 
 Those two **registers** are small dials of their own, sunk a step into the
 face with the fine circular graining of a turned counter, each with a steel
@@ -41,11 +43,9 @@ large numerals gets smaller registers rather than registers that run into its
 numerals — and a marker at three or nine that a register would reach is left
 off, the way a chronograph leaves it off.
 
-The **seconds hand** is painted rather than polished: each face has a colour
-of its own for it — red on the white and silver dials, a warm orange on the
-dark ones, gold on green, cream on burgundy, a deep red on champagne —
-because it is the hand the whole face is read by and has to be found in a
-glance among the steel.
+The **seconds hand** is printed rather than polished: a hair too fine to
+carry a facet, it is in the face's ink — black on the light dials, white on
+the dark ones — the way the time report's dial draws it.
 
 The hands **count up** for a stopwatch and **count down** for a timer. A
 reading that jumps — a reset, another stopwatch put on the dial, a tab woken
@@ -85,8 +85,7 @@ is lit by the light its face comes with.
   slate, black, blue, green, burgundy, champagne. The face's ink — dark on a
   light face, white on a dark one — is what the dial's _printing_ is in: the
   numerals, the track on the rim, the registers' marks and numbers, the name
-  and the movement's word. The seconds hand is the face's own colour for it
-  (above). The applied markers and the registers' hands are not printed at
+  and the movement's word — and the seconds hand (above). The applied markers and the registers' hands are not printed at
   all; they are polished steel, and what they look like is the light on them.
 - **Markers.** Nine styles, one at each five seconds: applied **batons** (a
   double at sixty); **blocks**, the same baton the whole way out with one wide

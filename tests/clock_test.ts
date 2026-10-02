@@ -885,13 +885,23 @@ describe("chronoTurns", () => {
   it("puts the seconds round the dial, the minutes and the hours round their registers", () => {
     const t = chronoTurns(h(1, 12) + 41, null);
     expect(t.second).toBeCloseTo(41 * 6, 6);
-    expect(t.minute).toBe(12 * 6);
+    expect(t.minute).toBeCloseTo((12 + 41 / 60) * 6, 6);
     expect(t.hour).toBeCloseTo(((h(1, 12) + 41) / 3600) * 30, 6);
   });
 
-  it("jumps the minute register a whole minute at a time", () => {
-    expect(chronoTurns(h(0, 4) + 59.9, null).minute).toBe(4 * 6);
-    expect(chronoTurns(h(0, 5), null).minute).toBe(5 * 6);
+  it("sweeps the registers with the reading, whatever the movement", () => {
+    // Half a minute in, the minute hand is half way to the next mark.
+    expect(chronoTurns(h(0, 4) + 30, null).minute).toBeCloseTo(4.5 * 6, 6);
+    // A quartz's seconds hand waits for the beat; the registers do not.
+    const a = chronoTurns(h(1, 4) + 30.3, 1);
+    const b = chronoTurns(h(1, 4) + 30.6, 1);
+    expect(b.second).toBeCloseTo(a.second, 6);
+    expect(b.minute).toBeGreaterThan(a.minute);
+    expect(b.hour).toBeGreaterThan(a.hour);
+    // And on the way down they fall back between beats, too.
+    const c = chronoTurns(h(0, 4) + 30.1, 1, -1);
+    const d = chronoTurns(h(0, 4) + 30.0, 1, -1);
+    expect(d.minute).toBeLessThan(c.minute);
   });
 
   it("wraps the minutes at the hour and the hours at twelve", () => {
@@ -914,10 +924,11 @@ describe("chronoTurns", () => {
     expect(chronoTurns(6.95, 1, -1).second).toBeGreaterThan(7 * 6);
   });
 
-  it("keeps a minute register in step with the seconds hand on the way down", () => {
-    // 60.5 s left is 1:01: one minute on the register, one second round.
+  it("keeps a minute register on the right minute on the way down", () => {
+    // 60.5 s left is 1:01: past the one-minute mark, one second round.
     const t = chronoTurns(60.5, 1, -1);
-    expect(t.minute).toBe(6);
+    expect(t.minute).toBeGreaterThan(6);
+    expect(t.minute).toBeLessThan(12);
     expect(t.second).toBeCloseTo(6, 6);
   });
 });
