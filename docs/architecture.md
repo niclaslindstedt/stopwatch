@@ -22,7 +22,7 @@ src/app/
   sheen.ts          where the light is, and what it does to the dial's steel   (pure)
   format.ts         a stopwatch's reading, a timer's time left, a duration, a moment on the wall clock
   locale.ts         the reader's clock (12- or 24-hour), read off Intl
-  appName.ts        the name the app shows: the listing's in an app build, Stopwatch on the website
+  appName.ts        the name the app shows: the listing's in an app build, Timer on the website
   merge.ts          two documents → one, record by record   (pure)
   migrations.ts     bytes ⇄ AppData, with validation
   ids.ts            fresh ids
@@ -104,7 +104,7 @@ Dropbox sign-in works the same way. The page's redirect cannot come back into
 a WebView on a loopback origin, so the wrapper offers an authentication
 session at `window.__ossAuthSession` — the framework's name — and the page's
 `connectDropboxAuthSession` uses it when `getAuthSessionHost()` finds one. The
-sheet returns on `<bundle id>://oauth` (`se.agilator.stopwatch://oauth` in the
+sheet returns on `<bundle id>://oauth` (`se.agilator.timer://oauth` in the
 store build), the redirect URI the Dropbox app must list.
 
 See [`features/native-app.md`](features/native-app.md) and
@@ -112,7 +112,7 @@ See [`features/native-app.md`](features/native-app.md) and
 
 ## The shape of the data
 
-One document (`stopwatch:doc` in localStorage):
+One document (`timer:doc` in localStorage):
 
 ```ts
 type AppData = {
@@ -169,7 +169,7 @@ are equal bytes, which keeps cloud revisions from churning.
 
 A document this build cannot read — not JSON at all, or written by a
 **newer** build — is refused rather than emptied: the store quarantines the
-bytes under `stopwatch:doc:unreadable` and boots empty without writing over
+bytes under `timer:doc:unreadable` and boots empty without writing over
 the stored copy, so the document comes back once the update applies.
 
 ## The service worker

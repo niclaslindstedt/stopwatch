@@ -7,8 +7,8 @@
 //! and offline and changes only when a new binary ships.
 //!
 //! Two launch-time overrides exist and both are for developing rather than for
-//! shipping: `STOPWATCH_APP_URL` points the window at a remote URL instead (the
-//! `/preview/` deploy slot, say), and `STOPWATCH_WEBROOT` serves a different
+//! shipping: `TIMER_APP_URL` points the window at a remote URL instead (the
+//! `/preview/` deploy slot, say), and `TIMER_WEBROOT` serves a different
 //! directory without rebuilding the binary.
 
 /// The private scheme the bundled site is served from.
@@ -19,7 +19,7 @@
 /// IndexedDB unable to keep a day between launches. A registered scheme
 /// gives one stable origin that the days are keyed to for the life of the
 /// install.
-pub const APP_SCHEME: &str = "stopwatch";
+pub const APP_SCHEME: &str = "timer";
 
 /// The host the bundled site is served under.
 ///
@@ -38,7 +38,7 @@ pub const APP_ENTRY: &str = "index.html";
 pub const BRAND_BG: (u8, u8, u8, u8) = (0x0b, 0x0d, 0x10, 0xff);
 
 /// What the window is called.
-pub const WINDOW_TITLE: &str = "Stopwatch";
+pub const WINDOW_TITLE: &str = "Timer";
 
 /// The window's opening size, and the smallest it may be dragged to.
 ///
@@ -52,7 +52,7 @@ pub const MIN_HEIGHT: f64 = 480.0;
 /// A remote URL to load instead of the bundled site, or `None` to serve the
 /// copy inside the app.
 pub fn remote_app_url() -> Option<String> {
-    std::env::var("STOPWATCH_APP_URL")
+    std::env::var("TIMER_APP_URL")
         .ok()
         .filter(|url| !url.is_empty())
 }

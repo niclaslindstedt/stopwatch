@@ -2,7 +2,7 @@
 
 Off by default. Under **Settings → Cloud sync**, choose Dropbox, grant access
 in Dropbox's own window, and the app keeps a copy of its document — one JSON
-file, `stopwatch.json` — in a folder of your account. Dropbox appears only when the
+file, `timer.json` — in a folder of your account. Dropbox appears only when the
 deploy was built with its app key (see
 [`../configuration.md`](../configuration.md)).
 
@@ -10,7 +10,7 @@ deploy was built with its app key (see
 browser cannot reach a device's iCloud, so on the website the option is not
 there at all. It has no window to grant anything in — the container belongs to
 the iCloud account the phone is already signed into, so choosing it is the
-whole of connecting. The file lands under **Files → iCloud Drive → Stopwatch**,
+whole of connecting. The file lands under **Files → iCloud Drive → Timer**,
 where you can open it and copy it out. See
 [`native-app.md`](native-app.md).
 

@@ -1,11 +1,11 @@
 # Getting started
 
-Stopwatch is a local-first stopwatch and timer. There is nothing to sign up
+Timer is a local-first stopwatch and timer. There is nothing to sign up
 for and nothing to install beyond the app itself.
 
 ## Use the hosted app
 
-Open [stopwatch.niclaslindstedt.se](https://stopwatch.niclaslindstedt.se/). On a phone,
+Open [timer.niclaslindstedt.se](https://timer.niclaslindstedt.se/). On a phone,
 use the browser's **Add to Home Screen** / install prompt: the app then opens
 full-screen like a native one and works with no network at all.
 
@@ -13,8 +13,8 @@ full-screen like a native one and works with no network at all.
 
 ```sh
 npm config set //npm.pkg.github.com/:_authToken <your-token>
-git clone https://github.com/niclaslindstedt/stopwatch.git
-cd stopwatch
+git clone https://github.com/niclaslindstedt/timer.git
+cd timer
 npm install
 npm run dev
 ```

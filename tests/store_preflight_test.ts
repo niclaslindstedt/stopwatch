@@ -44,7 +44,7 @@ describe("store-preflight", () => {
     // has one.
     const unset = preflight({ APP_BUNDLE_ID: "", APP_DISPLAY_NAME: "" });
     expect(unset).toContain(
-      "✗ APP_BUNDLE_ID is not set — builds and uploads would use dev.local.stopwatch",
+      "✗ APP_BUNDLE_ID is not set — builds and uploads would use dev.local.timer",
     );
     expect(unset).toContain("✗ APP_DISPLAY_NAME is not set");
   });

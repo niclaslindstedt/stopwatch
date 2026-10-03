@@ -9,7 +9,7 @@
 // keys in a browser, the platform keystore in a native wrapper — never in
 // localStorage and never on the server. Everything downstream is the
 // framework's: `ns.adapter()` is an ordinary `StorageAdapter` over one file,
-// `stopwatch.json`, so the engine's debounce, revision check, conflict and merge
+// `timer.json`, so the engine's debounce, revision check, conflict and merge
 // are the same code path Dropbox and iCloud take.
 //
 // Kept free of Preact so the decisions — which pairing a link carries, what
@@ -35,15 +35,15 @@ import {
 } from "@niclaslindstedt/oss-framework/storage";
 
 /** The app id this app's namespaces are created and listed under. */
-export const SELF_HOSTED_APP = "stopwatch";
+export const SELF_HOSTED_APP = "timer";
 
 /** What the namespace is called — encrypted on the device, so the server
  *  never learns even this. */
-export const NAMESPACE_NAME = "Stopwatch";
+export const NAMESPACE_NAME = "Timer";
 
 /** Which namespace holds the document, remembered per device. Not a secret:
  *  an id alone opens nothing without the keys in the vault. */
-export const NAMESPACE_KEY = "stopwatch:sync:selfhosted";
+export const NAMESPACE_KEY = "timer:sync:selfhosted";
 
 /** The URL fragment a pairing QR carries when it is an app link:
  *  `https://<this app>/#oss=<code>`. A phone's camera opens the app with it. */
@@ -51,7 +51,7 @@ const APP_LINK_MARK = "#oss=";
 
 /** The parts of the framework's client this app speaks — so a test can hand
  *  in a fake with the same shape and nothing else. */
-export type StopwatchClient = Pick<
+export type TimerClient = Pick<
   SelfHostedClient,
   | "state"
   | "session"
@@ -75,7 +75,7 @@ export type StopwatchClient = Pick<
 
 type Store = Pick<Storage, "getItem" | "setItem" | "removeItem">;
 
-export function createStopwatchClient(
+export function createTimerClient(
   vault: KeyVault = defaultKeyVault(SELF_HOSTED_APP),
 ): SelfHostedClient {
   return createSelfHostedClient({ app: SELF_HOSTED_APP, vault });
@@ -209,7 +209,7 @@ export function defaultDeviceName(userAgent: string): string {
             : /linux/.test(ua)
               ? "Linux"
               : "Browser";
-  return `Stopwatch on ${what}`;
+  return `Timer on ${what}`;
 }
 
 function readNamespaceId(storage: Store): string | null {
@@ -224,10 +224,10 @@ function readNamespaceId(storage: Store): string | null {
 }
 
 /** The namespace holding this app's document: the one this device used
- *  before; else the account's first `stopwatch` namespace (another device made
+ *  before; else the account's first `timer` namespace (another device made
  *  it); else a new one. Remembered for the next start. */
-export async function openStopwatchNamespace(
-  client: Pick<StopwatchClient, "namespace" | "namespaces" | "createNamespace">,
+export async function openTimerNamespace(
+  client: Pick<TimerClient, "namespace" | "namespaces" | "createNamespace">,
   storage: Store,
 ): Promise<StorageNamespace> {
   const remembered = readNamespaceId(storage);

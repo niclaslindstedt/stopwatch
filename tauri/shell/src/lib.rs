@@ -1,9 +1,9 @@
 // SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
-//! The Stopwatch desktop shell's decision layer.
+//! The Timer desktop shell's decision layer.
 //!
 //! Everything here is a pure function over its arguments: no Tauri, no window,
 //! no filesystem beyond asking whether a path exists. The effects that act on
-//! these answers live in the `stopwatch-tauri` crate next door.
+//! these answers live in the `timer-tauri` crate next door.
 //!
 //! There are only two decisions a wrapper this thin makes, and both are here —
 //! [`config`] (what the app is called and what origin it lives at) and

@@ -4,13 +4,13 @@
 // developer is reading the log.
 #![cfg_attr(not(debug_assertions), windows_subsystem = "windows")]
 
-//! The Stopwatch desktop shell — a window showing the bundled site, and nothing
+//! The Timer desktop shell — a window showing the bundled site, and nothing
 //! else.
 //!
 //! **The page never learns it is inside this app.** No initialization script,
 //! no injected globals, no commands: the website is served from a private
 //! scheme and runs exactly as it does in a browser tab, which is why running
-//! here needed no change to the app at all. Everything Stopwatch does — the
+//! here needed no change to the app at all. Everything Timer does — the
 //! document, the settings, the sync engine — it does through the ordinary
 //! browser APIs it already uses.
 //!
@@ -23,11 +23,11 @@ mod loopback;
 mod protocol;
 mod window;
 
-use stopwatch_shell::config::APP_SCHEME;
-use stopwatch_shell::oauth::{AWAIT_PATH, BEGIN_PATH};
-use stopwatch_shell::webroot::webroot_exists;
 use tauri::{Manager, WindowEvent};
 use tauri_plugin_dialog::{DialogExt, MessageDialogKind};
+use timer_shell::config::APP_SCHEME;
+use timer_shell::oauth::{AWAIT_PATH, BEGIN_PATH};
+use timer_shell::webroot::webroot_exists;
 
 fn main() {
     tauri::Builder::default()
@@ -45,12 +45,12 @@ fn main() {
         .plugin(tauri_plugin_dialog::init())
         .plugin(tauri_plugin_opener::init())
         // THE WHOLE APP, served off local disk from one stable origin. See
-        // `stopwatch_shell::webroot` for the three properties this arrangement is
+        // `timer_shell::webroot` for the three properties this arrangement is
         // for and how each is kept.
         //
         // Asynchronous for ONE path: `/__oauth/await` holds its answer until
         // the sign-in redirect lands on the loopback listener (see
-        // `stopwatch_shell::oauth`), which can be minutes, so it answers from a
+        // `timer_shell::oauth`), which can be minutes, so it answers from a
         // thread of its own. Everything else answers at once, as before.
         .register_asynchronous_uri_scheme_protocol(APP_SCHEME, |ctx, request, responder| {
             match request.uri().path() {
@@ -73,9 +73,9 @@ fn main() {
             // A packaged app has no console, so the one failure that leaves a
             // blank window has to say so somewhere a user will see it. In a
             // checkout this is "you have not run `npm run bundle` yet".
-            if stopwatch_shell::config::remote_app_url().is_none() && !webroot_exists(&root) {
+            if timer_shell::config::remote_app_url().is_none() && !webroot_exists(&root) {
                 let message = format!(
-                    "Stopwatch could not find the app it is meant to show.\n\n\
+                    "Timer could not find the app it is meant to show.\n\n\
                      Looked in: {}\n\n\
                      From a checkout, build it with `npm run bundle` in tauri/.",
                     root.display()
@@ -84,7 +84,7 @@ fn main() {
                     .dialog()
                     .message(message)
                     .kind(MessageDialogKind::Error)
-                    .title("Stopwatch")
+                    .title("Timer")
                     .blocking_show();
                 handle.exit(1);
                 return Ok(());
@@ -103,5 +103,5 @@ fn main() {
             }
         })
         .run(tauri::generate_context!())
-        .expect("the Stopwatch desktop shell could not start");
+        .expect("the Timer desktop shell could not start");
 }

@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
 // The self-hosted backend's lifecycle, as the sync engine and the screens see
 // it: restore this device's pairing from its key vault on start, open the
-// namespace that holds `stopwatch.json`, and carry the one request the rest of the
+// namespace that holds `timer.json`, and carry the one request the rest of the
 // app makes of it — "show the connect sheet" — whether that came from the
 // storage picker or from a pairing QR the phone's camera opened the app with.
 //
@@ -18,12 +18,12 @@ import {
 
 import { logStore } from "./log.ts";
 import {
-  createStopwatchClient,
+  createTimerClient,
   forgetNamespace,
-  openStopwatchNamespace,
+  openTimerNamespace,
   pairingFromUrl,
   withoutPairing,
-  type StopwatchClient,
+  type TimerClient,
 } from "./selfHosted.ts";
 
 const log = logStore.createLogger("selfhosted");
@@ -42,7 +42,7 @@ export type SelfHostedPhase =
 export type SelfHosted = {
   phase: SelfHostedPhase;
   namespace: StorageNamespace | null;
-  client: StopwatchClient;
+  client: TimerClient;
   /** The server this device is paired with, for the settings screen. */
   server: { url: string; name: string | null } | null;
   /** The last failure worth showing, in words. */
@@ -62,8 +62,8 @@ export type SelfHosted = {
 export function useSelfHosted(): SelfHosted {
   // One client for the life of the page: it holds the session and the
   // decrypted namespace keys in memory, and its keys live in the vault.
-  const clientRef = useRef<StopwatchClient | null>(null);
-  clientRef.current ??= createStopwatchClient();
+  const clientRef = useRef<TimerClient | null>(null);
+  clientRef.current ??= createTimerClient();
   const client = clientRef.current;
 
   const [phase, setPhase] = useState<SelfHostedPhase>("loading");
@@ -81,7 +81,7 @@ export function useSelfHosted(): SelfHosted {
       return;
     }
     try {
-      const ns = await openStopwatchNamespace(client, localStorage);
+      const ns = await openTimerNamespace(client, localStorage);
       setNamespace(ns);
       setPhase("ready");
       setError(null);

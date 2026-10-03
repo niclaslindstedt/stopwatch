@@ -103,7 +103,7 @@ export const DEFAULT_SETTINGS: AppSettings = {
   captureLogs: false,
 };
 
-const STORAGE_KEY = "stopwatch:settings";
+const STORAGE_KEY = "timer:settings";
 
 /** One of a table's keys, or the fallback: what every stored choice is
  *  clamped to, so a value from an older build (or a hand-edited one) can

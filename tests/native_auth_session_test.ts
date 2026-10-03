@@ -29,7 +29,7 @@ import {
 import { CLOUD_REQUEST_TYPE } from "../native/src/icloudBridge.ts";
 import { REPORT_TYPE } from "../native/src/injected.ts";
 
-const REDIRECT = redirectUriFor("se.agilator.stopwatch");
+const REDIRECT = redirectUriFor("se.agilator.timer");
 
 type FakeWindow = Record<string, unknown> & {
   posted: string[];
@@ -87,19 +87,19 @@ function schemeFor(bundleId: string | undefined): unknown {
 
 describe("the redirect URI", () => {
   it("is the app's scheme with an oauth path — the string Dropbox must list", () => {
-    expect(REDIRECT).toBe("se.agilator.stopwatch://oauth");
+    expect(REDIRECT).toBe("se.agilator.timer://oauth");
   });
 
-  it("has the bundle id for its scheme, so the store build returns on se.agilator.stopwatch://oauth", () => {
+  it("has the bundle id for its scheme, so the store build returns on se.agilator.timer://oauth", () => {
     // RFC 8252 §7.1: a reverse-DNS scheme no other app can claim. It follows
     // APP_BUNDLE_ID rather than being committed.
-    const scheme = schemeFor("se.agilator.stopwatch");
-    expect(scheme).toBe("se.agilator.stopwatch");
+    const scheme = schemeFor("se.agilator.timer");
+    expect(scheme).toBe("se.agilator.timer");
     expect(redirectUriFor(scheme as string)).toBe(REDIRECT);
   });
 
   it("falls back with the bundle id in a plain checkout", () => {
-    expect(schemeFor(undefined)).toBe("dev.local.stopwatch");
+    expect(schemeFor(undefined)).toBe("dev.local.timer");
   });
 });
 
@@ -216,7 +216,7 @@ describe("isAuthSessionRequest", () => {
       "http://localhost:8261/",
       "javascript:alert(1)",
       "file:///etc/passwd",
-      "se.agilator.stopwatch://oauth",
+      "se.agilator.timer://oauth",
       "https://",
       " https://www.dropbox.com/",
     ]) {
@@ -233,7 +233,7 @@ describe("authSessionResolveScript", () => {
     win.__ossAuthSessionResolve = (_id: string, result: unknown) => {
       seen = result;
     };
-    const nasty = `se.agilator.stopwatch://oauth?code=");alert(1);//&x=${String.fromCharCode(0x2028)}`;
+    const nasty = `se.agilator.timer://oauth?code=");alert(1);//&x=${String.fromCharCode(0x2028)}`;
     const script = authSessionResolveScript("a1", { ok: true, value: nasty });
     expect(script).not.toContain(String.fromCharCode(0x2028));
     run(script, win);

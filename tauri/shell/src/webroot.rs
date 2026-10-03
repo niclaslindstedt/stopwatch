@@ -2,14 +2,14 @@
 //! Serving the bundled website — the one module in this tree that would be
 //! wrong to simplify.
 //!
-//! The site is served from a registered private scheme (`stopwatch://`, see
+//! The site is served from a registered private scheme (`timer://`, see
 //! [`crate::config`]) handled in-process: no port to pick, no port to collide
 //! with, no socket listening on the user's machine, and no window in which
 //! another program could talk to it. Three properties matter and each is easy
 //! to lose:
 //!
 //!  1. **One stable origin.** The user's days live in IndexedDB and their
-//!     settings in `localStorage`, both keyed by origin. `stopwatch://` is a
+//!     settings in `localStorage`, both keyed by origin. `timer://` is a
 //!     constant, so the days survive every update. A `file://` page (or a
 //!     server on an ephemeral port) would hand the user a different origin —
 //!     and an empty days — at some point.
@@ -117,7 +117,7 @@ fn hex(byte: u8) -> Option<u8> {
 /// clamped (a path with one in it is not one this site ever emits, so it is a
 /// probe, and answering it with "here is the root instead" would make probing
 /// free), and a Windows prefix or a root component is refused outright —
-/// `stopwatch:///C:/…` must not become a drive letter.
+/// `timer:///C:/…` must not become a drive letter.
 fn contain_lexically(decoded: &str) -> Option<PathBuf> {
     let trimmed = decoded.trim_start_matches('/');
     let mut out = PathBuf::new();

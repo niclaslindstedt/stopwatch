@@ -33,7 +33,7 @@ const EAS_PROJECT_ID = process.env.EAS_PROJECT_ID ?? "";
 module.exports = () => ({
   expo: {
     name: DISPLAY_NAME,
-    slug: "stopwatch",
+    slug: "timer",
     version,
     // The Today screen is a watch: one dial, centred, with the day's controls
     // beside it where the window is wide enough. Landscape is a supported
@@ -44,7 +44,7 @@ module.exports = () => ({
     icon: "./assets/icon.png",
     // The URL scheme is the bundle id — reverse-DNS, as RFC 8252 §7.1 asks of
     // a private-use scheme, so it is this listing's own and no other app can
-    // claim it. `se.agilator.stopwatch` in production, `dev.local.stopwatch` in a
+    // claim it. `se.agilator.timer` in production, `dev.local.timer` in a
     // plain checkout; never committed.
     scheme: BUNDLE_ID,
     backgroundColor: BRAND_BG,
@@ -67,14 +67,14 @@ module.exports = () => ({
       },
       infoPlist: {
         // Publishes the container's `Documents` folder to the Files app as a
-        // folder called "Stopwatch", so the user can see, copy and back up the
+        // folder called "Timer", so the user can see, copy and back up the
         // report the app keeps there. Without this the container syncs but is
         // invisible — a report its owner cannot open.
         NSUbiquitousContainers: {
           [ICLOUD_CONTAINER]: {
             NSUbiquitousContainerIsDocumentScopePublic: true,
             NSUbiquitousContainerSupportedFolderLevels: "None",
-            NSUbiquitousContainerName: "Stopwatch",
+            NSUbiquitousContainerName: "Timer",
           },
         },
         // The bundled build is served over plain HTTP on the loopback
@@ -151,7 +151,7 @@ module.exports = () => ({
       // report bundled inside it (assets/webroot.zip) from a loopback server —
       // that is what makes it work offline, and what makes it an app rather
       // than a viewer for a website (App Store guideline 4.2). To point a
-      // debug build at a deployed slot, set EXPO_PUBLIC_STOPWATCH_URL at build
+      // debug build at a deployed slot, set EXPO_PUBLIC_TIMER_URL at build
       // time; src/config.ts reads that env var directly.
       ...(EAS_PROJECT_ID ? { eas: { projectId: EAS_PROJECT_ID } } : {}),
     },

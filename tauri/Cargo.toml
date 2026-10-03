@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
 #
-# The Tauri desktop shell — a THIN wrapper around the Stopwatch PWA, and nothing
+# The Tauri desktop shell — a THIN wrapper around the Timer PWA, and nothing
 # more. The app it opens is the same app the website serves; this tree adds a
 # window, a private scheme to serve the built site from, and no features.
 #
@@ -10,7 +10,7 @@
 #               what a file is served as. No Tauri, no GUI, no window.
 #   src-tauri/  the EFFECTS — the window, the scheme handler, the lifecycle.
 #
-# `cargo test -p stopwatch-shell` therefore runs the whole decision layer on a
+# `cargo test -p timer-shell` therefore runs the whole decision layer on a
 # machine with a Rust toolchain and nothing else installed — no WebKitGTK, no
 # WebView2, no Xcode. That is what keeps this tree's logic checkable on an
 # ordinary CI runner, and it is why the two files worth testing live one

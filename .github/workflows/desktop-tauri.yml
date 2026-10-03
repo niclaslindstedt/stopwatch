@@ -6,7 +6,7 @@ name: desktop-tauri
 # Split by the cost boundary the tree has structurally, because it is two
 # crates:
 #
-#   check    Cheap and automatic. `cargo test -p stopwatch-shell` is the whole
+#   check    Cheap and automatic. `cargo test -p timer-shell` is the whole
 #            decision layer and needs NO GUI libraries — that is the entire
 #            point of the crate split, and the reason this half lands in
 #            seconds on an ordinary runner.
@@ -68,11 +68,11 @@ jobs:
       - uses: Swatinem/rust-cache@v2
         with:
           workspaces: tauri
-      # `-p stopwatch-shell` and DELIBERATELY only that crate: it depends on no GUI
+      # `-p timer-shell` and DELIBERATELY only that crate: it depends on no GUI
       # toolkit, so this job installs nothing beyond a Rust toolchain. A test
       # that needed more than this is a decision sitting in the wrong crate.
       - name: test
-        run: cargo test -p stopwatch-shell
+        run: cargo test -p timer-shell
       - name: format
         run: cargo fmt --all -- --check
 
@@ -108,7 +108,7 @@ jobs:
       # need the same libraries to link, so they run here rather than in the
       # decision-layer job.
       - name: effects tests
-        run: cargo test -p stopwatch-tauri
+        run: cargo test -p timer-tauri
 
   package:
     name: package (${{ matrix.target }})

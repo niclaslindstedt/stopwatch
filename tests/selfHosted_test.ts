@@ -20,7 +20,7 @@ import {
   checkPairing,
   defaultDeviceName,
   forgetNamespace,
-  openStopwatchNamespace,
+  openTimerNamespace,
   pairingFromUrl,
   withoutPairing,
 } from "../src/app/selfHosted.ts";
@@ -124,13 +124,13 @@ describe("defaultDeviceName", () => {
   it.each([
     [
       "Mozilla/5.0 (iPhone; CPU iPhone OS 18_0 like Mac OS X)",
-      "Stopwatch on iPhone",
+      "Timer on iPhone",
     ],
-    ["Mozilla/5.0 (Linux; Android 15; Pixel 9)", "Stopwatch on Android"],
-    ["Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5)", "Stopwatch on Mac"],
-    ["Mozilla/5.0 (Windows NT 10.0; Win64; x64)", "Stopwatch on Windows"],
-    ["Mozilla/5.0 (X11; Linux x86_64)", "Stopwatch on Linux"],
-    ["", "Stopwatch on Browser"],
+    ["Mozilla/5.0 (Linux; Android 15; Pixel 9)", "Timer on Android"],
+    ["Mozilla/5.0 (Macintosh; Intel Mac OS X 14_5)", "Timer on Mac"],
+    ["Mozilla/5.0 (Windows NT 10.0; Win64; x64)", "Timer on Windows"],
+    ["Mozilla/5.0 (X11; Linux x86_64)", "Timer on Linux"],
+    ["", "Timer on Browser"],
   ])("%s → %s", (ua, name) => {
     expect(defaultDeviceName(ua)).toBe(name);
   });
@@ -169,11 +169,11 @@ function fakeClient(existing: string[], opts: { gone?: string[] } = {}) {
   };
 }
 
-describe("openStopwatchNamespace", () => {
+describe("openTimerNamespace", () => {
   it("creates the namespace on an account's first device, and remembers it", async () => {
     const storage = memoryStorage();
     const client = fakeClient([]);
-    const ns = await openStopwatchNamespace(client, storage);
+    const ns = await openTimerNamespace(client, storage);
     expect(ns.id).toBe("ns_new");
     expect(client.calls).toEqual([
       `list ${SELF_HOSTED_APP}`,
@@ -186,9 +186,7 @@ describe("openStopwatchNamespace", () => {
 
   it("joins the namespace another device made, rather than a second one", async () => {
     const client = fakeClient(["ns_a", "ns_b"]);
-    expect((await openStopwatchNamespace(client, memoryStorage())).id).toBe(
-      "ns_a",
-    );
+    expect((await openTimerNamespace(client, memoryStorage())).id).toBe("ns_a");
     expect(client.calls).not.toContain(`create ${NAMESPACE_NAME}`);
   });
 
@@ -197,7 +195,7 @@ describe("openStopwatchNamespace", () => {
       [NAMESPACE_KEY]: JSON.stringify({ namespaceId: "ns_b" }),
     });
     const client = fakeClient(["ns_a", "ns_b"]);
-    expect((await openStopwatchNamespace(client, storage)).id).toBe("ns_b");
+    expect((await openTimerNamespace(client, storage)).id).toBe("ns_b");
     expect(client.calls).toEqual(["open ns_b"]);
   });
 
@@ -206,7 +204,7 @@ describe("openStopwatchNamespace", () => {
       [NAMESPACE_KEY]: JSON.stringify({ namespaceId: "ns_old" }),
     });
     const client = fakeClient(["ns_a"], { gone: ["ns_old"] });
-    expect((await openStopwatchNamespace(client, storage)).id).toBe("ns_a");
+    expect((await openTimerNamespace(client, storage)).id).toBe("ns_a");
     expect(JSON.parse(storage.data.get(NAMESPACE_KEY)!).namespaceId).toBe(
       "ns_a",
     );
@@ -216,9 +214,9 @@ describe("openStopwatchNamespace", () => {
     const storage = memoryStorage({
       [NAMESPACE_KEY]: JSON.stringify({ namespaceId: "ns_far" }),
     });
-    await expect(
-      openStopwatchNamespace(fakeClient([]), storage),
-    ).rejects.toThrow("offline");
+    await expect(openTimerNamespace(fakeClient([]), storage)).rejects.toThrow(
+      "offline",
+    );
   });
 
   it("forgets", () => {

@@ -67,7 +67,7 @@ how to make a timer ring in a minute); that the whole app ships inside the
 binary and works in airplane mode (guideline 4.2); what the native layer adds;
 that nothing is sold and no data is collected; which permission, if any, the
 app asks for and why; and the privacy page, which the listing also points at:
-https://apps.agilator.se/stopwatch/privacy/`;
+https://apps.agilator.se/timer/privacy/`;
 
 // NO MAC OR STEAM COPY HERE. `listing.mts` says this app ships on the App
 // Store alone, so there is no second page to write. When a desktop storefront

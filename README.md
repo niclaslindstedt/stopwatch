@@ -1,14 +1,14 @@
-# Stopwatch
+# Timer
 
 > Local-first stopwatches and timers, drawn on a chronograph watch face. Run as many as you like at once, name them, and set timers that count down on the same dial. No account, no server.
 
-[![ci](https://github.com/niclaslindstedt/stopwatch/actions/workflows/ci.yml/badge.svg)](https://github.com/niclaslindstedt/stopwatch/actions/workflows/ci.yml)
-[![pages](https://github.com/niclaslindstedt/stopwatch/actions/workflows/pages.yml/badge.svg)](https://github.com/niclaslindstedt/stopwatch/actions/workflows/pages.yml)
+[![ci](https://github.com/niclaslindstedt/timer/actions/workflows/ci.yml/badge.svg)](https://github.com/niclaslindstedt/timer/actions/workflows/ci.yml)
+[![pages](https://github.com/niclaslindstedt/timer/actions/workflows/pages.yml/badge.svg)](https://github.com/niclaslindstedt/timer/actions/workflows/pages.yml)
 [![license](https://img.shields.io/badge/license-PolyForm--Noncommercial--1.0.0-blue.svg)](LICENSE)
 
 ## What
 
-**Stopwatch** is a stopwatch and a kitchen timer that run entirely in your
+**Timer** is a stopwatch and a kitchen timer that run entirely in your
 browser. The main screen is a chronograph: the big hand from the centre counts
 the seconds against a scale numbered 5 to 60, the small dial at three counts
 the minutes and the one at nine the hours. Press the watch and it starts;
@@ -41,7 +41,7 @@ native wrapper in [`native/`](native/README.md) — the whole web build packed
 inside the download and served from the device, so it runs with no network at
 all. On a phone that gains one thing a browser cannot: **iCloud**, as an
 option beside Dropbox, keeping the document in your own container under
-Files → iCloud Drive → Stopwatch. There is a desktop download for Windows,
+Files → iCloud Drive → Timer. There is a desktop download for Windows,
 macOS and Linux too ([`tauri/`](tauri/README.md)).
 
 It is built on [`@niclaslindstedt/oss-framework`](https://github.com/niclaslindstedt/oss-framework),
@@ -78,13 +78,13 @@ adapters, same theme engine, same PWA update lifecycle.
 
 ```sh
 npm config set //npm.pkg.github.com/:_authToken <your-token>
-git clone https://github.com/niclaslindstedt/stopwatch.git
-cd stopwatch
+git clone https://github.com/niclaslindstedt/timer.git
+cd timer
 npm install
 ```
 
 Or just open the hosted app at
-[stopwatch.niclaslindstedt.se](https://stopwatch.niclaslindstedt.se/) and install it
+[timer.niclaslindstedt.se](https://timer.niclaslindstedt.se/) and install it
 from your browser's "Add to Home Screen" / install prompt — it is a PWA and
 works fully offline.
 
@@ -182,10 +182,10 @@ the Dropbox key unset simply hides that provider:
 | Variable                  | Effect                                                                                                       |
 | ------------------------- | ------------------------------------------------------------------------------------------------------------ |
 | `VITE_DROPBOX_APP_KEY`    | Enables the Dropbox backend. A public PKCE client id — there is no secret to protect.                        |
-| `VITE_DROPBOX_APP_FOLDER` | Folder name the document is filed under (default `stopwatch`).                                               |
+| `VITE_DROPBOX_APP_FOLDER` | Folder name the document is filed under (default `timer`).                                                   |
 | `VITE_BASE`               | Deploy base path (default `/`).                                                                              |
 | `VITE_EDITION`            | `store` for the build sold in the App Store, which carries no link back to the source. Default: the website. |
-| `APP_DISPLAY_NAME`        | An app build's name, shown in the app: the listing's. The website always says `Stopwatch`.                   |
+| `APP_DISPLAY_NAME`        | An app build's name, shown in the app: the listing's. The website always says `Timer`.                       |
 | `VITE_SEED`               | `demo` boots onto the in-memory demo document (`make demo`, the store screenshots). Never set for a release. |
 
 iCloud takes no variable at all: it is offered by the native wrapper's host,
@@ -258,8 +258,8 @@ More in [`docs/troubleshooting.md`](docs/troubleshooting.md).
 ## Contributing
 
 Bugs and feature requests go to
-[Issues](https://github.com/niclaslindstedt/stopwatch/issues); open-ended
-questions to [Discussions](https://github.com/niclaslindstedt/stopwatch/discussions).
+[Issues](https://github.com/niclaslindstedt/timer/issues); open-ended
+questions to [Discussions](https://github.com/niclaslindstedt/timer/discussions).
 See [`CONTRIBUTING.md`](CONTRIBUTING.md) for the workflow, and
 [`SECURITY.md`](SECURITY.md) for private vulnerability reporting.
 

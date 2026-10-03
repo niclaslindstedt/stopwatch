@@ -190,18 +190,18 @@ export const RULES: StoreRules = {
   configVersion: 0,
 
   brand: {
-    projectName: "Stopwatch",
+    projectName: "Timer",
     publisher: "Agilator AB",
-    marketingUrl: "https://apps.agilator.se/stopwatch/",
+    marketingUrl: "https://apps.agilator.se/timer/",
     // Generated from one row in agilatorab/apps — see that repository's
     // AGENTS.md. A policy that claims less than the app does is a compliance
     // problem rather than a typo, so the row changes in the same release the
     // behaviour does.
-    privacyUrl: "https://apps.agilator.se/stopwatch/privacy/",
-    supportUrl: "https://apps.agilator.se/stopwatch/support/",
+    privacyUrl: "https://apps.agilator.se/timer/privacy/",
+    supportUrl: "https://apps.agilator.se/timer/support/",
   },
 
-  // Stopwatch ships on the App Store alone. There is no Mac App Store record and
+  // Timer ships on the App Store alone. There is no Mac App Store record and
   // no Steam page, so neither is compiled, and the preflight does not ask for
   // screenshots nobody submits. Turning one on is this flag plus the section
   // it belongs to below.

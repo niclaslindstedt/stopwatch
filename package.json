@@ -1,5 +1,5 @@
 {
-  "name": "stopwatch",
+  "name": "timer",
   "version": "0.1.0",
   "private": true,
   "description": "Local-first stopwatches and timers PWA on a chronograph watch face — run several at once, name them, count down from hours and minutes. No account, no server.",

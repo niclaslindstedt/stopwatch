@@ -49,7 +49,7 @@ For submission, fill in the placeholders in `eas.json` →
 
 ### 4. iOS capabilities
 
-The app declares one iCloud container, `iCloud.se.agilator.stopwatch`.
+The app declares one iCloud container, `iCloud.se.agilator.timer`.
 Before the first store build, in the Apple Developer portal:
 
 1. **Certificates, Identifiers & Profiles → Identifiers → iCloud Containers**
@@ -65,12 +65,12 @@ the log to say why.
 ### 5. Dropbox
 
 The phone app signs in to Dropbox through an in-app authentication session
-that returns on **`<bundle id>://oauth`** — `se.agilator.stopwatch://oauth` for the
+that returns on **`<bundle id>://oauth`** — `se.agilator.timer://oauth` for the
 store build (see
 [README → Signing in to Dropbox](README.md#signing-in-to-dropbox)). In the
 [Dropbox App Console](https://www.dropbox.com/developers/apps), open the app
 whose key is the `VITE_DROPBOX_APP_KEY` secret and add
-`se.agilator.stopwatch://oauth` under **Settings → OAuth 2 → Redirect URIs**,
+`se.agilator.timer://oauth` under **Settings → OAuth 2 → Redirect URIs**,
 exactly as written. The native workflow passes that secret (and
 `VITE_DROPBOX_APP_FOLDER`) to the web bundle; without it the app offers no
 Dropbox at all.
@@ -112,12 +112,12 @@ build without it launches to a blank screen.
 
 - [ ] `make lint && make test && make build` is green at the repo root.
 - [ ] `make native-typecheck` is green.
-- [ ] `EXPO_PUBLIC_STOPWATCH_URL` is **unset** — a build that streams the website
+- [ ] `EXPO_PUBLIC_TIMER_URL` is **unset** — a build that streams the website
       is the exact shape App Store guideline 4.2 rejects.
 - [ ] The version in the root `package.json` is the one you mean to ship.
 - [ ] On a real device signed into iCloud: **Settings → Cloud sync → iCloud
-      Drive**, start a stopwatch, and see `stopwatch.json` appear under
-      **Files → iCloud Drive → Stopwatch**. Then sign out of iCloud and
+      Drive**, start a stopwatch, and see `timer.json` appear under
+      **Files → iCloud Drive → Timer**. Then sign out of iCloud and
       confirm the app says so rather than losing the stopwatch.
 - [ ] **Settings → Cloud sync → Dropbox** opens Dropbox in a sheet over the
       app (not in Safari), and approving closes the sheet and connects.

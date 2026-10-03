@@ -11,7 +11,7 @@
 // page posts strings out, and the app injects scripts in. That is enough for
 // request/response as long as each call carries an id, so this module is:
 //
-//   • a script that defines `window.__stopwatchCloudHost`, whose five methods post
+//   • a script that defines `window.__timerCloudHost`, whose five methods post
 //     a request out and return a promise;
 //   • `isCloudRequest`, which narrows an inbound message; and
 //   • `resolveScript`, which builds the one line of JavaScript that settles
@@ -54,11 +54,11 @@ export type CloudRequest = {
 /** The event the page-side seam listens for. Must match `CLOUD_HOST_EVENT` in
  *  `src/app/cloudHost.ts` — a mismatch is not an error, it is a backend that
  *  never appears in the picker. */
-const HOST_EVENT = "stopwatch:cloud-host";
+const HOST_EVENT = "timer:cloud-host";
 
 /** Where the host installs itself. Must match `cloudHost.ts`'s
  *  `HOST_PROPERTY`, and for the same reason. */
-const HOST_PROPERTY = "__stopwatchCloudHost";
+const HOST_PROPERTY = "__timerCloudHost";
 
 /** The callback the app settles a pending promise through. Must match
  *  `resolveScript` below, and nothing in `src/` reads it. */

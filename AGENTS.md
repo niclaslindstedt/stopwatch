@@ -1,4 +1,4 @@
-# Agent guidance for stopwatch
+# Agent guidance for timer
 
 This file is the canonical source of truth for AI coding agents working in this
 repo. `CLAUDE.md`, `.cursorrules`, `.windsurfrules`, `GEMINI.md`, and
@@ -8,7 +8,7 @@ Fleet guidelines: APP_GUIDELINES 1.2.0
 
 ## What this app is, and the one rule that follows from it
 
-Stopwatch keeps stopwatches and timers — what somebody is timing, named by
+Timer keeps stopwatches and timers — what somebody is timing, named by
 them, and when they started it. Small as that is, the whole design premise is
 that it never leaves the device unless its owner explicitly connects their own
 cloud account.
@@ -45,7 +45,7 @@ test` and `make lint` stop at its edge:
 
 ```sh
 make tauri                # bundle the site into the shell and run the desktop app
-make tauri-test           # its decision layer (cargo test -p stopwatch-shell — no GUI libs)
+make tauri-test           # its decision layer (cargo test -p timer-shell — no GUI libs)
 make tauri-lint           # clippy at zero warnings, both crates
 make tauri-fmt            # rustfmt in place (tauri-fmt-check verifies)
 make tauri-package        # this machine's installers
@@ -53,7 +53,7 @@ make tauri-package-debug  # …debug profile: minutes faster, much bigger
 ```
 
 It is a **thin** wrapper: a window, the built site served from a private
-`stopwatch://` scheme, and one capability a page cannot have — the loopback listener
+`timer://` scheme, and one capability a page cannot have — the loopback listener
 that lets Dropbox sign in (`tauri/shell/src/oauth.rs`,
 `tauri/src-tauri/src/loopback.rs`). **The page is never told it is inside it**
 — no injected global, no Tauri command. `tauri/shell/` holds every decision and
@@ -198,7 +198,7 @@ like SVG's `focusable` as `"false"` rather than a JSX boolean.
   the "auto" setting; `App.tsx` hands it to `setLocalePrefs` once a render.
 - `src/app/appName.ts` — the name the app shows: the listing's
   (`APP_DISPLAY_NAME`, handed in as `__APP_NAME__`) in an app build,
-  `Stopwatch` on the website. `clock.ts`'s `nameLockup` sets it under twelve.
+  `Timer` on the website. `clock.ts`'s `nameLockup` sets it under twelve.
 - `src/app/merge.ts` — the per-record, last-edit-wins document merge that
   both cloud sync and backup restore run through. A removed one is a
   tombstone, so a sync never brings it back.
@@ -225,7 +225,7 @@ like SVG's `focusable` as `"false"` rather than a JSX boolean.
 - `src/app/selfHosted.ts` / `useSelfHosted.ts` — the reader's **own storage
   server** as a fourth backend: pairing codes (pasted, scanned in the phone
   app, or the `#oss=` app link), the device's name, and which namespace holds
-  `stopwatch.json`. The keys stay in the framework's key vault — never add
+  `timer.json`. The keys stay in the framework's key vault — never add
   them to localStorage, logs or a backup — and the server only ever gets
   ciphertext. The sheets are `SelfHostedConnectModal.tsx` and
   `SelfHostedSettings.tsx`.
@@ -416,8 +416,8 @@ and it has to be worth its own row here.
 ### What breaks quietly
 
 - **The iCloud bridge is three strings that must agree with `src/`**: the
-  property the host installs itself on (`window.__stopwatchCloudHost`), the
-  announcement event (`stopwatch:cloud-host`), and the provider's name
+  property the host installs itself on (`window.__timerCloudHost`), the
+  announcement event (`timer:cloud-host`), and the provider's name
   (`icloud`) — plus the five method names. None of them fails loudly on a
   mismatch: the backend simply never appears in the storage picker, on a
   device where the reader can see nothing wrong. `tests/native_icloud_test.ts`
@@ -428,7 +428,7 @@ and it has to be worth its own row here.
   the injected script against `getAuthSessionHost` to pin them. A drift is
   silent: the page finds no host and Dropbox opens in Safari again.
 - **The URL scheme is the bundle id**, and the Dropbox sign-in returns on
-  `<scheme>://oauth` — `se.agilator.stopwatch://oauth` in the store build, which
+  `<scheme>://oauth` — `se.agilator.timer://oauth` in the store build, which
   the Dropbox app must list as a redirect URI (`native/RELEASING.md`). The
   scheme follows `APP_BUNDLE_ID` (`native/identifiers.js`) and is never
   committed; changing the bundle id breaks phone sign-in until the App

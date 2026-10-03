@@ -65,7 +65,7 @@ const PUBLIC_SKIP = new Set([
 
 // Per-release-channel PWA display name. The three Pages channels share one
 // origin, so a channel-specific name installs the preview/branch builds as
-// visibly separate home-screen tiles instead of three identical "Stopwatch"
+// visibly separate home-screen tiles instead of three identical "Timer"
 // icons that are impossible to tell apart once installed.
 //
 // `short_name` is what a home screen actually paints under the tile, and it
@@ -74,12 +74,12 @@ const PUBLIC_SKIP = new Set([
 // read the same.
 function channelName(base: string): { name: string; short_name: string } {
   if (base === "/preview/")
-    return { name: "Stopwatch (preview)", short_name: "Stop pre" };
+    return { name: "Timer (preview)", short_name: "Timer pre" };
   if (base === "/branch/")
-    return { name: "Stopwatch (branch)", short_name: "Stop br" };
+    return { name: "Timer (branch)", short_name: "Timer br" };
   return {
-    name: "Stopwatch",
-    short_name: "Stopwatch",
+    name: "Timer",
+    short_name: "Timer",
   };
 }
 
@@ -149,7 +149,7 @@ export function buildServiceWorker(
 ): string {
   const cacheName = `${cacheId}-precache`;
   return `// SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
-// GENERATED — do not edit. Emitted by pwa-plugin.ts for the Stopwatch PWA.
+// GENERATED — do not edit. Emitted by pwa-plugin.ts for the Timer PWA.
 // A minimal "prompt to update" precaching worker: it installs the build's
 // assets, parks in \`waiting\` (never auto-skipWaiting — a silent swap would
 // discard an in-progress edit), and applies on a SKIP_WAITING message from the
@@ -328,7 +328,7 @@ export function appPwa({
         },
         {
           tag: "meta",
-          attrs: { name: "apple-mobile-web-app-title", content: "Stopwatch" },
+          attrs: { name: "apple-mobile-web-app-title", content: "Timer" },
           injectTo: "head",
         },
       ];
