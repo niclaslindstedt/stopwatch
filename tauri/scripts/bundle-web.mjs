@@ -1,7 +1,7 @@
 // SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
 // Builds the website and copies its `dist/` output into `tauri/webroot/`,
 // which the desktop shell serves from a private scheme (`shell/src/webroot.rs`).
-// This is what makes the app self-contained: Stopwatch runs entirely on-device,
+// This is what makes the app self-contained: Timer runs entirely on-device,
 // offline, and changes only when a new binary ships.
 //
 // The build is a plain `vite build` with the default base `/`, which is exactly

@@ -1,7 +1,7 @@
 # Sync
 
 Cloud sync is optional and off by default. When it is on, the app keeps a copy
-of its one document — `stopwatch.json` — in a folder of the user's own Dropbox,
+of its one document — `timer.json` — in a folder of the user's own Dropbox,
 iCloud or storage server, and pulls that copy in when it opens.
 
 ## The shape of it
@@ -83,8 +83,8 @@ decisions live in `src/app/selfHosted.ts` (pure, tested in
   the keys approves it in Settings after checking the same code is shown
   there. Typing the recovery key instead works too.
 
-The document goes to one namespace — the account's first `stopwatch` namespace, or
-a new one on the account's first device — as one encrypted file, `stopwatch.json`,
+The document goes to one namespace — the account's first `timer` namespace, or
+a new one on the account's first device — as one encrypted file, `timer.json`,
 through the namespace's `adapter()`: an ordinary `StorageAdapter`, so the
 debounce, the revision check, the conflict and the merge below are the same
 code path. It adds one thing the clouds do not: the server streams change

@@ -1,7 +1,7 @@
 # SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
 #
 # THE EFFECTS. Everything in this crate opens, draws or answers something; the
-# decisions behind all of it live in `stopwatch-shell`, which knows nothing about
+# decisions behind all of it live in `timer-shell`, which knows nothing about
 # Tauri. See ../Cargo.toml.
 #
 # The dependency list is the whole argument for a THIN wrapper: Tauri itself,
@@ -10,8 +10,8 @@
 # a feature to the app — the app is the website, unchanged.
 
 [package]
-name = "stopwatch-tauri"
-description = "The Tauri desktop shell around the Stopwatch PWA — one window, the bundled site, and nothing else."
+name = "timer-tauri"
+description = "The Tauri desktop shell around the Timer PWA — one window, the bundled site, and nothing else."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true
@@ -19,17 +19,17 @@ authors.workspace = true
 license.workspace = true
 publish.workspace = true
 
-# `stopwatch` rather than the package name, so the executable, the user-data folder
+# `timer` rather than the package name, so the executable, the user-data folder
 # and the docs all say the same word.
 [[bin]]
-name = "stopwatch"
+name = "timer"
 path = "src/main.rs"
 
 [build-dependencies]
 tauri-build = { version = "2", features = [] }
 
 [dependencies]
-stopwatch-shell = { path = "../shell" }
+timer-shell = { path = "../shell" }
 tauri = { version = "2", features = [] }
 # The fatal-error box — a packaged app has no console, so an unbundled or
 # unreadable webroot has to say so somewhere the user will see it.

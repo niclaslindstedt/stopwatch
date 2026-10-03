@@ -5,14 +5,14 @@
 //! on the machine is keyed to, and the navigation guard is the whole of this
 //! shell's security policy.
 
-use stopwatch_shell::config::{app_origin, is_internal_url, start_url, APP_HOST, APP_SCHEME};
+use timer_shell::config::{app_origin, is_internal_url, start_url, APP_HOST, APP_SCHEME};
 
 /// The two desktop webviews spell a registered scheme differently, and the
 /// shell has to hand each one the origin it actually granted.
 #[test]
 fn each_platform_gets_the_origin_it_grants() {
-    assert_eq!(app_origin(false), "stopwatch://localhost");
-    assert_eq!(app_origin(true), "http://stopwatch.localhost");
+    assert_eq!(app_origin(false), "timer://localhost");
+    assert_eq!(app_origin(true), "http://timer.localhost");
 }
 
 /// Not a tautology: these two words are what every stored day is keyed to,
@@ -20,50 +20,46 @@ fn each_platform_gets_the_origin_it_grants() {
 /// that cost visible to whoever changes them.
 #[test]
 fn the_origin_is_built_from_the_two_constants() {
-    assert_eq!(APP_SCHEME, "stopwatch");
+    assert_eq!(APP_SCHEME, "timer");
     assert_eq!(APP_HOST, "localhost");
 }
 
 #[test]
 fn the_window_opens_on_the_entry_page() {
     assert_eq!(
-        start_url("stopwatch://localhost"),
-        "stopwatch://localhost/index.html"
+        start_url("timer://localhost"),
+        "timer://localhost/index.html"
     );
     // A trailing slash on the origin must not become a double one.
     assert_eq!(
-        start_url("stopwatch://localhost/"),
-        "stopwatch://localhost/index.html"
+        start_url("timer://localhost/"),
+        "timer://localhost/index.html"
     );
 }
 
 #[test]
 fn our_own_pages_navigate_in_the_window() {
-    let origin = "stopwatch://localhost";
-    assert!(is_internal_url("stopwatch://localhost", origin, None));
+    let origin = "timer://localhost";
+    assert!(is_internal_url("timer://localhost", origin, None));
     assert!(is_internal_url(
-        "stopwatch://localhost/index.html",
+        "timer://localhost/index.html",
         origin,
         None
     ));
-    assert!(is_internal_url(
-        "stopwatch://localhost/privacy/",
-        origin,
-        None
-    ));
+    assert!(is_internal_url("timer://localhost/privacy/", origin, None));
 }
 
 /// Everything else opens in the user's browser rather than replacing the app
 /// with a web page it cannot leave.
 #[test]
 fn anything_else_does_not() {
-    let origin = "stopwatch://localhost";
+    let origin = "timer://localhost";
     for outside in [
-        "https://github.com/niclaslindstedt/stopwatch",
-        "https://stopwatch.niclaslindstedt.se/",
+        "https://github.com/niclaslindstedt/timer",
+        "https://timer.niclaslindstedt.se/",
         "file:///etc/passwd",
         // The near-miss that a naive `starts_with` on the scheme would admit.
-        "stopwatch://localhost.example.com/",
+        "timer://localhost.example.com/",
     ] {
         assert!(
             !is_internal_url(outside, origin, None),
@@ -72,14 +68,14 @@ fn anything_else_does_not() {
     }
 }
 
-/// A launch pointed at a remote build (`STOPWATCH_APP_URL`) navigates within THAT
+/// A launch pointed at a remote build (`TIMER_APP_URL`) navigates within THAT
 /// site too — otherwise every in-app link would bounce to the browser.
 #[test]
 fn a_remote_launch_navigates_within_its_own_site() {
-    let origin = "stopwatch://localhost";
-    let remote = Some("https://stopwatch.niclaslindstedt.se/preview/");
+    let origin = "timer://localhost";
+    let remote = Some("https://timer.niclaslindstedt.se/preview/");
     assert!(is_internal_url(
-        "https://stopwatch.niclaslindstedt.se/preview/index.html",
+        "https://timer.niclaslindstedt.se/preview/index.html",
         origin,
         remote
     ));

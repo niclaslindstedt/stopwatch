@@ -87,12 +87,12 @@ export type CloudHost = {
  *  can run after the app has mounted, so the app cannot simply read `window`
  *  once and conclude there is no host. Must match `HOST_EVENT` in
  *  `native/src/icloudBridge.ts`. */
-export const CLOUD_HOST_EVENT = "stopwatch:cloud-host";
+export const CLOUD_HOST_EVENT = "timer:cloud-host";
 
 /** Where a host installs itself. Must match `HOST_PROPERTY` in
  *  `native/src/icloudBridge.ts` — a mismatch is not an error, it is a backend
  *  that never appears in the picker. */
-export const CLOUD_HOST_PROPERTY = "__stopwatchCloudHost";
+export const CLOUD_HOST_PROPERTY = "__timerCloudHost";
 
 /** The one provider this build knows how to name. */
 export const ICLOUD_PROVIDER = "icloud";

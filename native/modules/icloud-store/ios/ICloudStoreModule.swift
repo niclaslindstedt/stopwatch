@@ -32,7 +32,7 @@ import ExpoModulesCore
 /// The container both halves address. Kept in step with `../index.ts` and
 /// `app.config.js`'s three iCloud entitlements — changing it after release
 /// strands every document already synced under the old identifier.
-private let CONTAINER_ID = "iCloud.se.agilator.stopwatch"
+private let CONTAINER_ID = "iCloud.se.agilator.timer"
 
 /// The subdirectory the documents sit in. `Documents` is the one iCloud
 /// publishes to the Files app, so the user can open the file holding their
@@ -64,7 +64,7 @@ private let DOWNLOAD_POLL: TimeInterval = 0.2
 /// cannot interleave inside the container. Labelled from the running app's own
 /// bundle id, so the label follows whatever identity the build was given.
 private let WORK_QUEUE = DispatchQueue(
-  label: "\(Bundle.main.bundleIdentifier ?? "dev.local.stopwatch").icloud-store",
+  label: "\(Bundle.main.bundleIdentifier ?? "dev.local.timer").icloud-store",
   qos: .utility
 )
 

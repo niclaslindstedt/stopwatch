@@ -3,23 +3,23 @@
 //!
 //! The one thing kept between launches is where the window was: its size,
 //! position and maximized / fullscreen state, in the app's own data directory.
-//! Every decision about that file is `stopwatch_shell::window_state`'s; this
+//! Every decision about that file is `timer_shell::window_state`'s; this
 //! file only asks the window and the monitors.
 
 use std::path::{Path, PathBuf};
 use tauri::webview::NewWindowResponse;
 
-use stopwatch_shell::config::{
-    app_origin, is_internal_url, remote_app_url, start_url, BRAND_BG, WINDOW_TITLE,
-};
-use stopwatch_shell::window_state::{
-    load_window_state, save_window_state, DisplayArea, WindowState, MIN_HEIGHT, MIN_WIDTH,
-};
 use tauri::{
     AppHandle, LogicalPosition, LogicalSize, Manager, Url, WebviewUrl, WebviewWindow,
     WebviewWindowBuilder, WindowEvent,
 };
 use tauri_plugin_opener::OpenerExt;
+use timer_shell::config::{
+    app_origin, is_internal_url, remote_app_url, start_url, BRAND_BG, WINDOW_TITLE,
+};
+use timer_shell::window_state::{
+    load_window_state, save_window_state, DisplayArea, WindowState, MIN_HEIGHT, MIN_WIDTH,
+};
 
 /// The origin the platform grants our registered scheme, for this build.
 pub fn origin() -> String {
@@ -95,7 +95,7 @@ pub fn build(app: &AppHandle) -> tauri::Result<WebviewWindow> {
 }
 
 /// The shipped geometry, for a build with no data directory to read one from.
-const DEFAULT_WINDOW: WindowState = stopwatch_shell::window_state::DEFAULT_STATE;
+const DEFAULT_WINDOW: WindowState = timer_shell::window_state::DEFAULT_STATE;
 
 fn warn(line: &str) {
     eprintln!("{line}");

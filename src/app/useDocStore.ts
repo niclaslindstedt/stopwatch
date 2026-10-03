@@ -15,7 +15,7 @@ import * as output from "../output.ts";
 // reads and writes *around* this hook rather than through it, so losing the
 // network never costs an edit.
 
-const DOC_KEY = "stopwatch:doc";
+const DOC_KEY = "timer:doc";
 
 /** The document storage seam. The store never touches `localStorage`
  *  directly — it reads and writes through a `DocBackend`, so a test (or the

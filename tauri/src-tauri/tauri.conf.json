@@ -1,9 +1,9 @@
 {
   "$schema": "https://schema.tauri.app/config/2",
-  "productName": "Stopwatch",
-  "mainBinaryName": "stopwatch",
+  "productName": "Timer",
+  "mainBinaryName": "timer",
   "version": "../../package.json",
-  "identifier": "dev.local.stopwatch",
+  "identifier": "dev.local.timer",
   "build": {
     "frontendDist": "./placeholder"
   },

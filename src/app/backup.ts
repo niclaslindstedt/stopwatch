@@ -19,7 +19,7 @@ import type { AppData } from "./types.ts";
 
 /** The exported file's name — dated so a folder of backups sorts itself. */
 export function backupFileName(today = dayKeyOf(new Date())): string {
-  return `stopwatch-backup-${today}.json`;
+  return `timer-backup-${today}.json`;
 }
 
 /** Save the whole document to a file the user picks a home for. Rejects when

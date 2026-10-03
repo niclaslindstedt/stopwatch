@@ -70,18 +70,18 @@ const syncLog = logStore.createLogger("sync");
 
 export type SyncBackendId = "local" | "icloud" | "dropbox" | "selfhosted";
 
-const BACKEND_KEY = "stopwatch:sync:backend";
-const DROPBOX_TOKENS_KEY = "stopwatch:sync:dropbox";
+const BACKEND_KEY = "timer:sync:backend";
+const DROPBOX_TOKENS_KEY = "timer:sync:dropbox";
 // A backend the app no longer offers kept its token here. The key stays named
 // so a token a device may still hold is cleared rather than left in storage.
-const RETIRED_GDRIVE_TOKEN_KEY = "stopwatch:sync:gdrive";
+const RETIRED_GDRIVE_TOKEN_KEY = "timer:sync:gdrive";
 
 /** How long after the last edit a push is sent. Long enough to coalesce a
  *  burst of taps on the Today screen into one request. */
 const SAVE_DEBOUNCE_MS = 1200;
 
 /** The document's file name on a cloud backend. */
-const CLOUD_FILE_NAME = "stopwatch.json";
+const CLOUD_FILE_NAME = "timer.json";
 
 // OAuth app identities, injected at build time. Without them the matching
 // backend is hidden rather than offered and then failing at connect time.
@@ -90,12 +90,12 @@ export const DROPBOX_APP_KEY: string =
 
 // Dropbox fixes the app-folder name from the app's own configuration (an
 // "App folder"-scoped app lives under `Apps/<name>/`), so it isn't always
-// `stopwatch`. Inject the real name at build time so the displayed location
+// `timer`. Inject the real name at build time so the displayed location
 // points at the folder that actually exists. A deploy can pin another name
 // with `VITE_DROPBOX_APP_FOLDER`.
 export const DROPBOX_APP_FOLDER: string =
   (import.meta.env.VITE_DROPBOX_APP_FOLDER as string | undefined)?.trim() ||
-  "stopwatch";
+  "timer";
 
 export const PROVIDER_NAMES: Record<SyncBackendId, string> = {
   local: "This device",
@@ -117,7 +117,7 @@ export const AVAILABLE_BACKENDS: SyncBackendId[] = [
 
 /** The document's folder on a host-offered store, as the reader would find it
  *  in the Files app: the app's own iCloud folder, named after the app. */
-const ICLOUD_FOLDER = "iCloud Drive/Stopwatch";
+const ICLOUD_FOLDER = "iCloud Drive/Timer";
 
 type DropboxTokens = { accessToken: string; refreshToken: string | null };
 
@@ -256,7 +256,7 @@ export function useSyncEngine(
       });
       return withLocalCache(cloud, {
         storage: localStorage,
-        key: localCacheKey("dropbox", "stopwatch"),
+        key: localCacheKey("dropbox", "timer"),
       });
     }
     if (backend === "icloud" && cloudHost) {
@@ -269,7 +269,7 @@ export function useSyncEngine(
       });
       return withLocalCache(cloud, {
         storage: localStorage,
-        key: localCacheKey("icloud", "stopwatch"),
+        key: localCacheKey("icloud", "timer"),
       });
     }
     if (backend === "selfhosted" && selfHostedNs) {
@@ -282,7 +282,7 @@ export function useSyncEngine(
       });
       return withLocalCache(cloud, {
         storage: localStorage,
-        key: localCacheKey("selfhosted", "stopwatch"),
+        key: localCacheKey("selfhosted", "timer"),
       });
     }
     return null;

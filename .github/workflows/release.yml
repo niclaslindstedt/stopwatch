@@ -80,7 +80,7 @@ jobs:
 
           **macOS:** the app is signed but not notarized, so the first launch is
           refused. Open **System Settings → Privacy & Security**, scroll to the
-          message about Stopwatch and choose **Open Anyway**. macOS remembers after
+          message about Timer and choose **Open Anyway**. macOS remembers after
           that.
           NOTES
           fi

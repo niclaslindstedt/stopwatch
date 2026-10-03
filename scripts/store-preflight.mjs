@@ -301,7 +301,7 @@ if (/^[A-Z0-9]{10}$/i.test(String(iosSubmit.appleTeamId ?? ""))) {
 // THE STORE IDENTITY IS CONFIGURATION, NOT SOURCE. native/identifiers.js
 // reads the bundle id and the listing name from APP_BUNDLE_ID and
 // APP_DISPLAY_NAME, and app.config.js takes them from there; both fall back to
-// a development identity (`dev.local.stopwatch`, the project name) so a plain
+// a development identity (`dev.local.timer`, the project name) so a plain
 // checkout runs; the fastlane Appfile reads the same APP_BUNDLE_ID,
 // and the phone bundle's header reads the same APP_DISPLAY_NAME. So what is
 // checked is that the variables are set — a fallback that reaches an upload

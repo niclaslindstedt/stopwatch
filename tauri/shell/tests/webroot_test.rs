@@ -10,7 +10,7 @@
 use std::fs;
 use std::path::{Path, PathBuf};
 
-use stopwatch_shell::webroot::{
+use timer_shell::webroot::{
     content_type_for, percent_decode, resolve_webroot_file, webroot_exists,
 };
 
@@ -22,7 +22,7 @@ struct Site {
 
 impl Site {
     fn new(name: &str) -> Self {
-        let root = std::env::temp_dir().join(format!("stopwatch-webroot-{name}"));
+        let root = std::env::temp_dir().join(format!("timer-webroot-{name}"));
         let _ = fs::remove_dir_all(&root);
         fs::create_dir_all(root.join("assets")).expect("temp webroot");
         fs::create_dir_all(root.join("privacy")).expect("temp webroot");
@@ -116,7 +116,7 @@ fn an_embedded_nul_is_refused() {
 #[test]
 fn a_symlink_out_of_the_webroot_is_refused() {
     let site = Site::new("symlink");
-    let outside = std::env::temp_dir().join("stopwatch-webroot-symlink-outside.txt");
+    let outside = std::env::temp_dir().join("timer-webroot-symlink-outside.txt");
     fs::write(&outside, b"not the site").expect("outside file");
     std::os::unix::fs::symlink(&outside, site.path().join("escape.txt")).expect("symlink");
 

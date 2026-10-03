@@ -1,8 +1,8 @@
 {
-  "name": "stopwatch-native",
+  "name": "timer-native",
   "version": "0.1.0",
   "private": true,
-  "description": "Thin native (Expo/React Native) wrapper around the Stopwatch PWA. Bundles the built web app on-device, serves it from a loopback origin in a WebView, and adds an iCloud Drive storage backend.",
+  "description": "Thin native (Expo/React Native) wrapper around the Timer PWA. Bundles the built web app on-device, serves it from a loopback origin in a WebView, and adds an iCloud Drive storage backend.",
   "main": "index.ts",
   "scripts": {
     "bundle": "node scripts/bundle-web.mjs",

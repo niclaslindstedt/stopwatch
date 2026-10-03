@@ -296,7 +296,7 @@ function seed({ at, now, state, settings }) {
   };
   const isTimer = state in timers;
   localStorage.setItem(
-    "stopwatch:doc",
+    "timer:doc",
     JSON.stringify({
       version: 1,
       stopwatches: isTimer ? {} : stopwatches[state],
@@ -304,7 +304,7 @@ function seed({ at, now, state, settings }) {
     }),
   );
   localStorage.setItem(
-    "stopwatch:settings",
+    "timer:settings",
     JSON.stringify({ ...settings, mode: isTimer ? "timer" : "stopwatch" }),
   );
 }

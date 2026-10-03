@@ -69,5 +69,5 @@ device, then **Reload** on the second.
 **The app opened empty after an update.** A document a newer build wrote can
 be unreadable to an older one still cached by the service worker. The app
 leaves the stored copy untouched and quarantines a copy under
-`stopwatch:doc:unreadable`; reload once the update has applied and it comes
+`timer:doc:unreadable`; reload once the update has applied and it comes
 back.

@@ -107,11 +107,11 @@ describe("parseHostEntries", () => {
   it("keeps a path with its revision, and a path without one", () => {
     expect(
       parseHostEntries([
-        { path: "stopwatch.json", rev: "1700000000000000:412" },
+        { path: "timer.json", rev: "1700000000000000:412" },
         { path: "other.json" },
       ]),
     ).toEqual([
-      { path: "stopwatch.json", rev: "1700000000000000:412" },
+      { path: "timer.json", rev: "1700000000000000:412" },
       { path: "other.json" },
     ]);
   });
@@ -124,15 +124,15 @@ describe("parseHostEntries", () => {
         null,
         { path: "" },
         { rev: "x" },
-        { path: "stopwatch.json", rev: 7 },
-        "stopwatch.json",
+        { path: "timer.json", rev: 7 },
+        "timer.json",
       ]),
-    ).toEqual([{ path: "stopwatch.json" }]);
+    ).toEqual([{ path: "timer.json" }]);
   });
 
   it("is empty for anything that is not a list", () => {
     expect(parseHostEntries(undefined)).toEqual([]);
-    expect(parseHostEntries({ path: "stopwatch.json" })).toEqual([]);
+    expect(parseHostEntries({ path: "timer.json" })).toEqual([]);
   });
 });
 
@@ -142,8 +142,8 @@ describe("the strings a host has to match", () => {
     // in the picker, on a device where the reader can see nothing wrong. The
     // other half of each pair is in `native/src/icloudBridge.ts`, which
     // `native_icloud_test.ts` reads.
-    expect(CLOUD_HOST_PROPERTY).toBe("__stopwatchCloudHost");
-    expect(CLOUD_HOST_EVENT).toBe("stopwatch:cloud-host");
+    expect(CLOUD_HOST_PROPERTY).toBe("__timerCloudHost");
+    expect(CLOUD_HOST_EVENT).toBe("timer:cloud-host");
     expect(ICLOUD_PROVIDER).toBe("icloud");
   });
 });
@@ -167,7 +167,7 @@ describe("createCloudHostAdapter", () => {
   const adapterFor = (result: unknown) =>
     createCloudHostAdapter(answering(result), {
       label: "iCloud Drive",
-      fileName: "stopwatch.json",
+      fileName: "timer.json",
     });
 
   it("reads the document the host hands over, with its revision", async () => {
@@ -179,20 +179,20 @@ describe("createCloudHostAdapter", () => {
         list: () =>
           Promise.resolve({
             ok: true,
-            value: [{ path: "stopwatch.json", rev: "17:412" }],
+            value: [{ path: "timer.json", rev: "17:412" }],
           }),
         read: (path: string) => {
           asked = path;
           return Promise.resolve({ ok: true, value: '{"version":2}' });
         },
       },
-      { label: "iCloud Drive", fileName: "stopwatch.json" },
+      { label: "iCloud Drive", fileName: "timer.json" },
     );
     await expect(adapter.load()).resolves.toEqual({
       text: '{"version":2}',
       revision: "17:412",
     });
-    expect(asked).toBe("stopwatch.json");
+    expect(asked).toBe("timer.json");
   });
 
   it("says nothing is stored yet rather than inventing a document", async () => {

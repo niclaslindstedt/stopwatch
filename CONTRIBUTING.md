@@ -1,4 +1,4 @@
-# Contributing to stopwatch
+# Contributing to timer
 
 Thanks for your interest! This document describes how to set up a dev
 environment, the conventions we follow, and how to get a change merged.
@@ -13,8 +13,8 @@ environment, the conventions we follow, and how to get a change merged.
 ## Getting the source
 
 ```sh
-git clone https://github.com/niclaslindstedt/stopwatch.git
-cd stopwatch
+git clone https://github.com/niclaslindstedt/timer.git
+cd timer
 npm install
 ```
 

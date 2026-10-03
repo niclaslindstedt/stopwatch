@@ -12,7 +12,7 @@
 // the tests — gets the plain name rather than a ReferenceError.
 
 /** The project's own name: the website's, and any build nobody named. */
-export const PROJECT_NAME = "Stopwatch";
+export const PROJECT_NAME = "Timer";
 
 /** The name this build shows. */
 export const APP_NAME: string =

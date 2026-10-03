@@ -11,7 +11,7 @@ import { en } from "../src/app/i18n/en.ts";
 describe("APP_NAME", () => {
   it("falls back to the project's own name when the build named nothing", () => {
     expect(APP_NAME).toBe(PROJECT_NAME);
-    expect(PROJECT_NAME).toBe("Stopwatch");
+    expect(PROJECT_NAME).toBe("Timer");
   });
 
   it("is what every sentence that names the app says", () => {

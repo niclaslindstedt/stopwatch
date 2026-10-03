@@ -1,9 +1,9 @@
 # The desktop app
 
-Stopwatch runs in any browser, and it installs to a home screen or a dock as a
+Timer runs in any browser, and it installs to a home screen or a dock as a
 Progressive Web App. There is a third way to have it: a proper desktop download
 for **Windows, macOS and Linux**, attached to every release on the
-[releases page](https://github.com/niclaslindstedt/stopwatch/releases).
+[releases page](https://github.com/niclaslindstedt/timer/releases).
 
 ## Which file
 
@@ -13,7 +13,7 @@ Pick the one for your machine — the app inside all three is the same app.
 - **macOS** — the `.dmg`. The release notes say whether it is notarized by
   Apple; if it is, it opens like any other app. If it is signed but not
   notarized, the first launch is refused: open **System Settings → Privacy &
-  Security**, scroll to the message about Stopwatch and choose **Open Anyway**.
+  Security**, scroll to the message about Timer and choose **Open Anyway**.
   macOS remembers after that.
 - **Linux** — the `.AppImage` runs on anything without installing; the `.deb`
   is for Debian and Ubuntu.

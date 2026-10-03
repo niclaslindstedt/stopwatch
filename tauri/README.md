@@ -1,8 +1,8 @@
 <!-- SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0 -->
 
-# Stopwatch — the desktop app
+# Timer — the desktop app
 
-A desktop wrapper around Stopwatch for **Windows, macOS and Linux**. It is a thin
+A desktop wrapper around Timer for **Windows, macOS and Linux**. It is a thin
 [Tauri](https://tauri.app) shell whose entire content is the built website, so
 the app **looks and works exactly like the site** — and because the site is
 bundled inside it and served from a private scheme, it works with no network at
@@ -11,7 +11,7 @@ all and is an app rather than a viewer for a web page.
 **Thin is the specification, not a stage it is passing through.** The page is
 never told it is in here: there is no initialization script, no injected
 global, no Tauri command, and no permission on the window beyond Tauri's own
-minimum. Everything Stopwatch does — the document, the settings, the sync engine, the alarm —
+minimum. Everything Timer does — the document, the settings, the sync engine, the alarm —
 it does through the ordinary browser APIs it already uses in a tab. That is why
 running here needed no change to the app at all, and it is the property to keep:
 a feature that only exists in the desktop build is a second product.
@@ -43,7 +43,7 @@ which is what keeps the download and the idle memory small.
 | `shell/tests/`              | Its whole test suite — runs anywhere a Rust toolchain does    |
 | `src-tauri/src/main.rs`     | The process: the builder, the plugins, the lifecycle          |
 | `src-tauri/src/window.rs`   | The window, and pinning it to our own origin                  |
-| `src-tauri/src/protocol.rs` | Answering `stopwatch://` off the bundled `webroot/`           |
+| `src-tauri/src/protocol.rs` | Answering `timer://` off the bundled `webroot/`               |
 | `src-tauri/build.rs`        | `tauri_build::build()`, and nothing beside it                 |
 | `src-tauri/capabilities/`   | **Tauri's own ACL** — what the window may reach               |
 | `src-tauri/icons/`          | The app's mark, from `scripts/generate-icons.mjs` at the root |
@@ -51,7 +51,7 @@ which is what keeps the download and the idle memory small.
 
 `shell/` holds every **decision** and depends on no GUI toolkit; `src-tauri/`
 holds every **effect** and cannot be built without one. So
-`cargo test -p stopwatch-shell` runs the entire decision layer on a machine with a
+`cargo test -p timer-shell` runs the entire decision layer on a machine with a
 Rust toolchain and nothing else installed — no WebKitGTK, no WebView2, no
 Xcode. That is what makes this tree's logic coverable on an ordinary CI runner,
 and a test that would need more than that is a decision sitting in the wrong
@@ -128,17 +128,17 @@ this tree's edge, because it has its own toolchain.
 Both are for developing rather than for shipping; an installed copy has nothing
 to set.
 
-| Variable            | Effect                                                               |
-| ------------------- | -------------------------------------------------------------------- |
-| `STOPWATCH_APP_URL` | Load a remote URL instead of the bundled site (the `/preview/` slot) |
-| `STOPWATCH_WEBROOT` | Serve the site from somewhere else without rebuilding                |
+| Variable        | Effect                                                               |
+| --------------- | -------------------------------------------------------------------- |
+| `TIMER_APP_URL` | Load a remote URL instead of the bundled site (the `/preview/` slot) |
+| `TIMER_WEBROOT` | Serve the site from somewhere else without rebuilding                |
 
 ## Releasing
 
 ### The identity comes from the deployment
 
 `src-tauri/tauri.conf.json` commits the project's own name and a development
-identifier (`dev.local.stopwatch`). What an installed copy is called and the
+identifier (`dev.local.timer`). What an installed copy is called and the
 identifier it installs under arrive at packaging time, as the phone app's do:
 
 | Secret             | Becomes                                     |

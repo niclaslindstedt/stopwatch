@@ -51,23 +51,23 @@ devices' edits reconcile are the web app's, in `src/app/watch.ts`,
 
 ## Layout
 
-| Path                       | What it is                                                                                                                                                                                                                                                                                     |
-| -------------------------- | ---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
-| `App.tsx`                  | The whole app: a WebView, a spinner, and a failure screen.                                                                                                                                                                                                                                     |
-| `src/local-server.ts`      | Unpacks `assets/webroot.zip` and serves it on a **fixed** loopback port.                                                                                                                                                                                                                       |
-| `src/injected.ts`          | The theme reporter injected into the page, the status-bar style chosen from its report, and the service-worker teardown.                                                                                                                                                                       |
-| `src/icloudBridge.ts`      | **Pure.** The injected store host, and the request/response plumbing. Tested from the root.                                                                                                                                                                                                    |
-| `src/icloudWire.ts`        | **Import-free.** The shapes that cross the bridge, and nothing else.                                                                                                                                                                                                                           |
-| `src/icloud.ts`            | Answers a store request through the native module, and maps a failure to its kind.                                                                                                                                                                                                             |
-| `src/authSessionBridge.ts` | **Pure.** The injected sign-in provider (`window.__ossAuthSession`) and its request/response plumbing. Tested from the root.                                                                                                                                                                   |
-| `src/authSession.ts`       | Opens one sign-in in an authentication session (`expo-web-browser`) and hands back where it ended.                                                                                                                                                                                             |
-| `src/saveFileBridge.ts`    | **Pure.** The `save-file` descriptor (`window.__ossShell`), the request check, and the script that answers the page. Tested from the root.                                                                                                                                                     |
-| `src/saveFile.ts`          | Writes one export to the cache and opens the share sheet (`expo-file-system`, `expo-sharing`).                                                                                                                                                                                                 |
-| `src/scanQrBridge.ts`      | **Pure.** The `scan-qr` descriptor (`window.__ossShell`), the request check, the origin check, and the script that answers the page. Tested from the root.                                                                                                                                     |
-| `src/QrScanner.tsx`        | The camera, mounted only while the page waits on a scan: asks for the camera then, reads one QR code, keeps no frame (`expo-camera`).                                                                                                                                                          |
-| `src/scriptText.ts`        | **Import-free.** Splicing text safely into an injected script; shared by the bridges.                                                                                                                                                                                                          |
-| `modules/icloud-store/`    | A local Expo module: list / read / write / remove inside the app's iCloud container.                                                                                                                                                                                                           |
-| `scripts/bundle-web.mjs`   | Builds the web app as the store edition (`VITE_EDITION=store`) and as a shell (`VITE_SHELL_BUILD=on`: no service worker, no update prompt), named `APP_DISPLAY_NAME` (env, then `.env`, then `Stopwatch`), and packs `dist/` into `assets/webroot.zip`, refusing a webroot with `sw.js` in it. |
+| Path                       | What it is                                                                                                                                                                                                                                                                                 |
+| -------------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------ |
+| `App.tsx`                  | The whole app: a WebView, a spinner, and a failure screen.                                                                                                                                                                                                                                 |
+| `src/local-server.ts`      | Unpacks `assets/webroot.zip` and serves it on a **fixed** loopback port.                                                                                                                                                                                                                   |
+| `src/injected.ts`          | The theme reporter injected into the page, the status-bar style chosen from its report, and the service-worker teardown.                                                                                                                                                                   |
+| `src/icloudBridge.ts`      | **Pure.** The injected store host, and the request/response plumbing. Tested from the root.                                                                                                                                                                                                |
+| `src/icloudWire.ts`        | **Import-free.** The shapes that cross the bridge, and nothing else.                                                                                                                                                                                                                       |
+| `src/icloud.ts`            | Answers a store request through the native module, and maps a failure to its kind.                                                                                                                                                                                                         |
+| `src/authSessionBridge.ts` | **Pure.** The injected sign-in provider (`window.__ossAuthSession`) and its request/response plumbing. Tested from the root.                                                                                                                                                               |
+| `src/authSession.ts`       | Opens one sign-in in an authentication session (`expo-web-browser`) and hands back where it ended.                                                                                                                                                                                         |
+| `src/saveFileBridge.ts`    | **Pure.** The `save-file` descriptor (`window.__ossShell`), the request check, and the script that answers the page. Tested from the root.                                                                                                                                                 |
+| `src/saveFile.ts`          | Writes one export to the cache and opens the share sheet (`expo-file-system`, `expo-sharing`).                                                                                                                                                                                             |
+| `src/scanQrBridge.ts`      | **Pure.** The `scan-qr` descriptor (`window.__ossShell`), the request check, the origin check, and the script that answers the page. Tested from the root.                                                                                                                                 |
+| `src/QrScanner.tsx`        | The camera, mounted only while the page waits on a scan: asks for the camera then, reads one QR code, keeps no frame (`expo-camera`).                                                                                                                                                      |
+| `src/scriptText.ts`        | **Import-free.** Splicing text safely into an injected script; shared by the bridges.                                                                                                                                                                                                      |
+| `modules/icloud-store/`    | A local Expo module: list / read / write / remove inside the app's iCloud container.                                                                                                                                                                                                       |
+| `scripts/bundle-web.mjs`   | Builds the web app as the store edition (`VITE_EDITION=store`) and as a shell (`VITE_SHELL_BUILD=on`: no service worker, no update prompt), named `APP_DISPLAY_NAME` (env, then `.env`, then `Timer`), and packs `dist/` into `assets/webroot.zip`, refusing a webroot with `sw.js` in it. |
 
 `ios/` and `android/` are **prebuild output**: regenerated from `app.config.js`
 by `expo prebuild --clean`, gitignored, and the source of truth for nothing.
@@ -97,12 +97,12 @@ To point a build at a deployed slot instead of the bundled copy (debugging
 only — a store build must never do this):
 
 ```sh
-EXPO_PUBLIC_STOPWATCH_URL=https://stopwatch.niclaslindstedt.se/preview/ npm run ios
+EXPO_PUBLIC_TIMER_URL=https://timer.niclaslindstedt.se/preview/ npm run ios
 ```
 
 ## iCloud
 
-One file, `stopwatch.json`, in the app's own iCloud container, under `Documents`
+One file, `timer.json`, in the app's own iCloud container, under `Documents`
 — which is the folder iCloud publishes to the **Files app**, so the reader can
 open, copy and delete the file holding their own stopwatches. A document that
 synced to a place its owner could not see would be a worse answer than not
@@ -120,13 +120,13 @@ the page is shown again.
 the app's sync engine (src/app/useSyncEngine.ts)
    │  a StorageAdapter over the host — src/app/cloudHost.ts
    ▼
-window.__stopwatchCloudHost           — installed by src/icloudBridge.ts
+window.__timerCloudHost           — installed by src/icloudBridge.ts
    │  postMessage ⇅ injectJavaScript
    ▼
 App.tsx → src/icloud.ts → modules/icloud-store
    │
    ▼
-iCloud.se.agilator.stopwatch/Documents/stopwatch.json
+iCloud.se.agilator.timer/Documents/timer.json
 ```
 
 The four operations are the framework's `FileStore` — `list`, `read`, `write`,
@@ -237,12 +237,12 @@ takes as "cancelled" and leaves the backend as it was.
 **The redirect URI is `<scheme>://oauth`, and the scheme is the bundle id**
 (`app.config.js`'s `scheme` is `BUNDLE_ID` from `identifiers.js` — reverse-DNS,
 as RFC 8252 §7.1 asks of a private-use scheme). So the store build returns on
-**`se.agilator.stopwatch://oauth`**, and a plain checkout on
-`dev.local.stopwatch://oauth`. Dropbox requires the exact URI to be registered: the
-Dropbox app behind `VITE_DROPBOX_APP_KEY` must list `se.agilator.stopwatch://oauth`
+**`se.agilator.timer://oauth`**, and a plain checkout on
+`dev.local.timer://oauth`. Dropbox requires the exact URI to be registered: the
+Dropbox app behind `VITE_DROPBOX_APP_KEY` must list `se.agilator.timer://oauth`
 under **Settings → OAuth 2 → Redirect URIs** in the
 [App Console](https://www.dropbox.com/developers/apps), next to the website's
-and the desktop app's (add `dev.local.stopwatch://oauth` too to sign in from a
+and the desktop app's (add `dev.local.timer://oauth` too to sign in from a
 development build). Without it Dropbox shows "Invalid redirect_uri" in the
 sheet.
 

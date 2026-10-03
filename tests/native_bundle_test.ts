@@ -26,7 +26,7 @@ describe("the phone app's web build", () => {
         VITE_DROPBOX_APP_KEY: "key",
         VITE_SHELL_BUILD: "off",
       },
-      "Stopwatch",
+      "Timer",
     );
     expect(env.PATH).toBe("/bin");
     expect(env.VITE_DROPBOX_APP_KEY).toBe("key");
@@ -34,7 +34,7 @@ describe("the phone app's web build", () => {
   });
 
   it("lets a caller choose another edition explicitly", () => {
-    expect(webBuildEnv({ VITE_EDITION: "web" }, "Stopwatch").VITE_EDITION).toBe(
+    expect(webBuildEnv({ VITE_EDITION: "web" }, "Timer").VITE_EDITION).toBe(
       "web",
     );
   });

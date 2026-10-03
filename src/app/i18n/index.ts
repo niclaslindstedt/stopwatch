@@ -20,8 +20,8 @@ export const i18n = createI18n<Lang, Catalog>({
   fallbackLang: "en",
   fallbackCatalog: en,
   toBcp47: () => "en-GB",
-  storageKey: "stopwatch:language",
-  eventName: "stopwatch:language",
+  storageKey: "timer:language",
+  eventName: "timer:language",
 });
 
 export const { LanguageRoot, useT, useLang, setLanguage, supportedLangs } =

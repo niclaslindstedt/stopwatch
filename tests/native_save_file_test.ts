@@ -121,7 +121,7 @@ describe("a save, end to end", () => {
     );
     inject(SAVE_FILE_DESCRIPTOR);
     await expect(
-      saveFile({ text: "{}", filename: "stopwatch-backup.json" }),
+      saveFile({ text: "{}", filename: "timer-backup.json" }),
     ).rejects.toThrow(nasty);
   });
 

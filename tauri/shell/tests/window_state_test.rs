@@ -6,7 +6,7 @@
 use std::fs;
 use std::path::PathBuf;
 
-use stopwatch_shell::window_state::{
+use timer_shell::window_state::{
     load_window_state, on_some_display, save_window_state, state_file, DisplayArea, WindowState,
     DEFAULT_STATE, MIN_HEIGHT, MIN_WIDTH,
 };
@@ -31,7 +31,7 @@ struct Dir(PathBuf);
 
 impl Dir {
     fn new(name: &str) -> Self {
-        let path = std::env::temp_dir().join(format!("stopwatch-window-{name}"));
+        let path = std::env::temp_dir().join(format!("timer-window-{name}"));
         let _ = fs::remove_dir_all(&path);
         fs::create_dir_all(&path).expect("fixture dir");
         Self(path)

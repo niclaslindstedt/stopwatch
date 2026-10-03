@@ -94,7 +94,7 @@ touching the dial. A link at the foot goes to the page that lists all of them.
 ## The window's title
 
 While something on the dial runs, the browser tab's title is its reading and
-its name — "12:34 · Stopwatch 1 — Stopwatch" — so a tab in the background
+its name — "12:34 · Stopwatch 1 — Timer" — so a tab in the background
 still tells the time, and says "Time's up" when a timer rings.
 
 ## Wide windows, and a phone laid down

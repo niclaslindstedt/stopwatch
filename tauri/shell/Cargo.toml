@@ -1,12 +1,12 @@
 # SPDX-License-Identifier: PolyForm-Noncommercial-1.0.0
 #
 # THE DECISIONS. Nothing in this crate opens, draws or talks to anything, and
-# it depends on no GUI toolkit — which is what lets `cargo test -p stopwatch-shell`
+# it depends on no GUI toolkit — which is what lets `cargo test -p timer-shell`
 # run on a runner with a Rust toolchain and nothing else. See ../Cargo.toml.
 
 [package]
-name = "stopwatch-shell"
-description = "The decision layer behind the Stopwatch desktop shell: where the bundled site is, and what one request off it resolves to."
+name = "timer-shell"
+description = "The decision layer behind the Timer desktop shell: where the bundled site is, and what one request off it resolves to."
 version.workspace = true
 edition.workspace = true
 rust-version.workspace = true

@@ -80,19 +80,19 @@ describe("isCloudRequest", () => {
       expect(isCloudRequest({ ...base, method, path: "" })).toBe(false);
     }
     expect(
-      isCloudRequest({ ...base, method: "read", path: "stopwatch.json" }),
+      isCloudRequest({ ...base, method: "read", path: "timer.json" }),
     ).toBe(true);
   });
 
   it("requires bytes of a write, and an empty document is bytes", () => {
     expect(
-      isCloudRequest({ ...base, method: "write", path: "stopwatch.json" }),
+      isCloudRequest({ ...base, method: "write", path: "timer.json" }),
     ).toBe(false);
     expect(
       isCloudRequest({
         ...base,
         method: "write",
-        path: "stopwatch.json",
+        path: "timer.json",
         text: "",
       }),
     ).toBe(true);
@@ -256,9 +256,7 @@ describe("the entries a host lists", () => {
     // `list()` on the native side returns `{ path, rev }` per file; this is
     // the app agreeing that is what it reads.
     expect(
-      parseHostEntries([
-        { path: "stopwatch.json", rev: "1700000000000000:412" },
-      ]),
-    ).toEqual([{ path: "stopwatch.json", rev: "1700000000000000:412" }]);
+      parseHostEntries([{ path: "timer.json", rev: "1700000000000000:412" }]),
+    ).toEqual([{ path: "timer.json", rev: "1700000000000000:412" }]);
   });
 });

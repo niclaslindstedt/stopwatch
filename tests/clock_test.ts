@@ -771,7 +771,7 @@ describe("nameLockup", () => {
     expect(l.width).toBeLessThan(NAME_LOCKUP_MAX);
   });
 
-  it("sets a longer name — the app's own — smaller, to the widest the dial allows", () => {
+  it("sets a longer name smaller, to the widest the dial allows", () => {
     const short = nameLockup("Laps");
     const l = nameLockup("Stopwatch");
     expect(l.text).toBe("STOPWATCH");

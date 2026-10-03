@@ -1,4 +1,4 @@
-# Security policy for stopwatch
+# Security policy for timer
 
 ## Supported versions
 
@@ -9,7 +9,7 @@ considered end-of-life.
 
 **Do not open public GitHub issues for security problems.**
 
-Instead, please report privately via [GitHub Security Advisories](https://github.com/niclaslindstedt/stopwatch/security/advisories/new),
+Instead, please report privately via [GitHub Security Advisories](https://github.com/niclaslindstedt/timer/security/advisories/new),
 or by email to `niclas@agilator.se`.
 
 ## Response
@@ -24,7 +24,7 @@ reporter and credit them in the release notes (unless they request otherwise).
 
 ## Scope
 
-In scope: any vulnerability in the published release of stopwatch. This app
+In scope: any vulnerability in the published release of timer. This app
 holds what somebody is timing, named in their own words, and when they started
 it, so the paths that decide who can read it are the ones that matter most —
 the OAuth token handling for the cloud backends (`src/app/useSyncEngine.ts`),

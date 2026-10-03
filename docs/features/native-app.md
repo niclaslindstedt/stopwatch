@@ -1,6 +1,6 @@
 # The app on a phone
 
-Stopwatch is a PWA first: open it in a browser, add it to the home
+Timer is a PWA first: open it in a browser, add it to the home
 screen, and it is an app. `native/` is the other way in — the same web app,
 wrapped thinly enough to ship through the **App Store** and **Google Play**,
 and in exchange for that wrapper it gains one thing the browser cannot give
@@ -33,11 +33,11 @@ so on the website the option is simply not there.
 Choosing it is all there is to it. There is no account to connect and no
 window to grant anything in: the container belongs to the iCloud account the
 phone is already signed into. From then on the document — one file,
-`stopwatch.json` — is kept in the app's own iCloud folder, and every device signed
+`timer.json` — is kept in the app's own iCloud folder, and every device signed
 into the same account merges the same way two Dropbox devices do: stopwatch by
 stopwatch, the later edit of each winning (see [`../sync.md`](../sync.md)).
 
-The file lives under **Files → iCloud Drive → Stopwatch**, where you can open
+The file lives under **Files → iCloud Drive → Timer**, where you can open
 it, copy it out, or delete it. That is deliberate: these are your stopwatches,
 and a copy you cannot see is a copy you do not control.
 
